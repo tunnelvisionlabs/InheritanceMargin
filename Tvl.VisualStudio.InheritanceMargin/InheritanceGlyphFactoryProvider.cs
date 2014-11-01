@@ -16,7 +16,7 @@
     [ContentType("text")]
     [TagType(typeof(InheritanceTag))]
     [Order]
-    public class InheritanceGlyphFactoryProvider : IGlyphFactoryProvider
+    internal class InheritanceGlyphFactoryProvider : IGlyphFactoryProvider
     {
         private static bool _packageLoaded;
 

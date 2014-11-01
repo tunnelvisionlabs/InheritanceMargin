@@ -4,7 +4,7 @@
 
     using Guid = System.Guid;
 
-    public sealed class CommandId
+    internal sealed class CommandId
     {
         public static readonly IEqualityComparer<CommandId> DictionaryEqualityComparer = new EqualityComparer();
 

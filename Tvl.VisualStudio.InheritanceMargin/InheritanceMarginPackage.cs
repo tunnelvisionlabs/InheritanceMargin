@@ -15,7 +15,7 @@
     [Guid(InheritanceMarginConstants.guidInheritanceMarginPackageString)]
     [PackageRegistration(UseManagedResourcesOnly = true)]
     [ProvideMenuResource(1000, 1)]
-    public class InheritanceMarginPackage : Package, IOleCommandTarget
+    internal class InheritanceMarginPackage : Package, IOleCommandTarget
     {
         private static InheritanceMarginPackage _instance;
 

@@ -1,6 +1,6 @@
 ﻿namespace Tvl.VisualStudio.InheritanceMargin.CommandTranslation
 {
-    public class CommandTargetParameters
+    internal class CommandTargetParameters
     {
         private CommandTargetParameters(string text, int id)
         {

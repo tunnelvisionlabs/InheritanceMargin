@@ -10,7 +10,7 @@
     using _DTE = EnvDTE._DTE;
     using DTE = EnvDTE.DTE;
 
-    public class CSharpInheritanceTagger : ITagger<IInheritanceTag>
+    internal class CSharpInheritanceTagger : ITagger<IInheritanceTag>
     {
         internal static readonly ITagSpan<IInheritanceTag>[] NoTags = new ITagSpan<IInheritanceTag>[0];
         private static Type _analyzerType;

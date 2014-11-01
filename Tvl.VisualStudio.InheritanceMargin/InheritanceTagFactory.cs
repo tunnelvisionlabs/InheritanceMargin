@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public class InheritanceTagFactory : IInheritanceTagFactory
+    internal class InheritanceTagFactory : IInheritanceTagFactory
     {
         public IInheritanceTag CreateTag(InheritanceGlyph glyph, string displayName, IEnumerable<IInheritanceTarget> targets)
         {

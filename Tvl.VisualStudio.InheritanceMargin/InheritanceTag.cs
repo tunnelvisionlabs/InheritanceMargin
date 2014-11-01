@@ -10,7 +10,7 @@
     using FrameworkElement = System.Windows.FrameworkElement;
     using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 
-    public class InheritanceTag : IInheritanceTag
+    internal class InheritanceTag : IInheritanceTag
     {
         private readonly InheritanceGlyph _glyph;
         private readonly string _tooltip;

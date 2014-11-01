@@ -13,7 +13,7 @@
     [TagType(typeof(IInheritanceTag))]
     [Export(typeof(ITaggerProvider))]
     [ContentType("CSharp")]
-    public class CSharpInheritanceTaggerProvider : ITaggerProvider
+    internal class CSharpInheritanceTaggerProvider : ITaggerProvider
     {
         public CSharpInheritanceTaggerProvider()
         {

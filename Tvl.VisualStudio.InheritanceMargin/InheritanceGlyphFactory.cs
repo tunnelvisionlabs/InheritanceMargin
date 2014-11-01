@@ -9,7 +9,7 @@
 
     using CommandBinding = System.Windows.Input.CommandBinding;
 
-    public class InheritanceGlyphFactory : IGlyphFactory
+    internal class InheritanceGlyphFactory : IGlyphFactory
     {
         private readonly InheritanceGlyphFactoryProvider _provider;
         private readonly IWpfTextView _view;

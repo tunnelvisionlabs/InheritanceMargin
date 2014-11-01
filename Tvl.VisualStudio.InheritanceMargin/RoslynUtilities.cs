@@ -4,7 +4,7 @@
     using Microsoft.VisualStudio.Shell.Interop;
 
     // Stolen from Microsoft.RestrictedUsage.CSharp.Utilities in Microsoft.VisualStudio.CSharp.Services.Language.dll
-    public static class RoslynUtilities
+    internal static class RoslynUtilities
     {
         private static bool? roslynInstalled;
 

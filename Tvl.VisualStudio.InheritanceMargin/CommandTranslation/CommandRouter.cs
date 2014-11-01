@@ -21,7 +21,7 @@
     using SVsUIShell = Microsoft.VisualStudio.Shell.Interop.SVsUIShell;
     using VSConstants = Microsoft.VisualStudio.VSConstants;
 
-    public static class CommandRouter
+    internal static class CommandRouter
     {
         private static SVsServiceProvider ServiceProvider
         {

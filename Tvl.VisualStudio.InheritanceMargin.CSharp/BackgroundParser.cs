@@ -10,7 +10,7 @@
     using Path = System.IO.Path;
     using Timer = System.Threading.Timer;
 
-    public abstract class BackgroundParser : IInheritanceParser, IDisposable
+    internal abstract class BackgroundParser : IInheritanceParser, IDisposable
     {
         private readonly WeakReference _textBuffer;
         private readonly TaskScheduler _taskScheduler;

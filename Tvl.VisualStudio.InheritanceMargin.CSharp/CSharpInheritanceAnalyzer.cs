@@ -43,7 +43,7 @@
     using IProject = Microsoft.VisualStudio.CSharp.Services.Language.Interop.IProject;
 #endif
 
-    public class CSharpInheritanceAnalyzer : BackgroundParser
+    internal class CSharpInheritanceAnalyzer : BackgroundParser
     {
         private readonly SVsServiceProvider _serviceProvider;
         private readonly IInheritanceTagFactory _tagFactory;
