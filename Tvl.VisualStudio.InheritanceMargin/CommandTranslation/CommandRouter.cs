@@ -1,7 +1,6 @@
 ﻿namespace Tvl.VisualStudio.InheritanceMargin.CommandTranslation
 {
     using System;
-    using Tvl.VisualStudio.Shell;
 
     using Application = System.Windows.Application;
     using COMException = System.Runtime.InteropServices.COMException;
@@ -19,6 +18,7 @@
     using POINTS = Microsoft.VisualStudio.Shell.Interop.POINTS;
     using RoutedCommand = System.Windows.Input.RoutedCommand;
     using SVsServiceProvider = Microsoft.VisualStudio.Shell.SVsServiceProvider;
+    using SVsUIShell = Microsoft.VisualStudio.Shell.Interop.SVsUIShell;
     using VSConstants = Microsoft.VisualStudio.VSConstants;
 
     public static class CommandRouter
@@ -36,7 +36,7 @@
             Point position = Mouse.GetPosition(Application.Current.MainWindow);
             Point point2 = Application.Current.MainWindow.PointToScreen(position);
             ContextMenuRouter pCmdTrgtActive = new ContextMenuRouter(routing);
-            IVsUIShell service = ServiceProvider.GetUIShell();
+            IVsUIShell service = ServiceProvider.GetService(typeof(SVsUIShell)) as IVsUIShell;
             POINTS[] pos = new POINTS[1];
             pos[0].x = (short)point2.X;
             pos[0].y = (short)point2.Y;

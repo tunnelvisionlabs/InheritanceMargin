@@ -7,8 +7,6 @@
     using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.Text;
     using Microsoft.VisualStudio.Text.Tagging;
-    using Tvl;
-    using Tvl.VisualStudio.Language.Parsing;
     using Tvl.VisualStudio.OutputWindow.Interfaces;
 
     using Stopwatch = System.Diagnostics.Stopwatch;
@@ -47,8 +45,6 @@
 
     public class CSharpInheritanceAnalyzer : BackgroundParser
     {
-        private static readonly ParseErrorEventArgs[] NoErrors = new ParseErrorEventArgs[0];
-
         private readonly SVsServiceProvider _serviceProvider;
         private readonly IInheritanceTagFactory _tagFactory;
 
@@ -335,13 +331,12 @@
                     }
                 }
 
-                InheritanceParseResultEventArgs result = new InheritanceParseResultEventArgs(snapshot, NoErrors, stopwatch.Elapsed, tags);
+                InheritanceParseResultEventArgs result = new InheritanceParseResultEventArgs(snapshot, stopwatch.Elapsed, tags);
                 OnParseComplete(result);
             }
-            catch (InvalidOperationException ex)
+            catch (InvalidOperationException)
             {
                 base.MarkDirty(true);
-                ex.PreserveStackTrace();
                 throw;
             }
         }
@@ -636,7 +631,7 @@
                     SourceFile sourceFile;
                     if (!compilation.SourceFiles.TryGetValue(new FileName(fileName), out sourceFile))
                     {
-                        InheritanceParseResultEventArgs errorResult = new InheritanceParseResultEventArgs(snapshot, NoErrors, stopwatch.Elapsed, tags);
+                        InheritanceParseResultEventArgs errorResult = new InheritanceParseResultEventArgs(snapshot, stopwatch.Elapsed, tags);
                         OnParseComplete(errorResult);
                         return;
                     }
@@ -802,13 +797,12 @@
                     }
                 }
 
-                InheritanceParseResultEventArgs result = new InheritanceParseResultEventArgs(snapshot, NoErrors, stopwatch.Elapsed, tags);
+                InheritanceParseResultEventArgs result = new InheritanceParseResultEventArgs(snapshot, stopwatch.Elapsed, tags);
                 OnParseComplete(result);
             }
-            catch (InvalidOperationException ex)
+            catch (InvalidOperationException)
             {
                 base.MarkDirty(true);
-                ex.PreserveStackTrace();
                 throw;
             }
         }

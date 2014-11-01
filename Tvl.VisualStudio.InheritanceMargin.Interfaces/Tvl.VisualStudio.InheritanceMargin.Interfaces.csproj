@@ -70,6 +70,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IInheritanceParser.cs" />
     <Compile Include="IInheritanceTag.cs" />
     <Compile Include="IInheritanceTagFactory.cs" />
     <Compile Include="IInheritanceTarget.cs" />
@@ -82,16 +83,6 @@
       <Link>SharedKey.snk</Link>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Tvl.VisualStudio.Language.Interfaces\Tvl.VisualStudio.Language.Interfaces.csproj">
-      <Project>{4599ac99-de26-4686-8821-67cf461c6b26}</Project>
-      <Name>Tvl.VisualStudio.Language.Interfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Tvl.VisualStudio.Language\Tvl.VisualStudio.Language.csproj">
-      <Project>{90e28bca-bd13-475b-b051-7a7d852a6206}</Project>
-      <Name>Tvl.VisualStudio.Language</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -7,8 +7,6 @@
     using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.Text;
     using Microsoft.VisualStudio.Text.Tagging;
-    using Tvl.VisualStudio.Language.Parsing;
-    using Tvl.VisualStudio.Shell;
     using _DTE = EnvDTE._DTE;
     using DTE = EnvDTE.DTE;
 
@@ -19,7 +17,7 @@
 
         private readonly CSharpInheritanceTaggerProvider _provider;
         private readonly ITextBuffer _buffer;
-        private readonly BackgroundParser _analyzer;
+        private readonly IInheritanceParser _analyzer;
 
         private ITagSpan<IInheritanceTag>[] _tags = NoTags;
 
@@ -36,7 +34,7 @@
             if (_analyzerType == null)
                 _analyzerType = LoadAnalyzerType(provider.GlobalServiceProvider);
 
-            this._analyzer = (BackgroundParser)Activator.CreateInstance(_analyzerType, buffer, provider.TaskScheduler, provider.TextDocumentFactoryService, provider.OutputWindowService, provider.GlobalServiceProvider, new InheritanceTagFactory());
+            this._analyzer = (IInheritanceParser)Activator.CreateInstance(_analyzerType, buffer, provider.TaskScheduler, provider.TextDocumentFactoryService, provider.OutputWindowService, provider.GlobalServiceProvider, new InheritanceTagFactory());
             this._analyzer.ParseComplete += HandleParseComplete;
             this._analyzer.RequestParse(false);
         }
@@ -57,7 +55,7 @@
         {
             Version version;
             int vsMajorVersion;
-            if (Version.TryParse(serviceProvider.GetService<_DTE, DTE>().Version, out version))
+            if (Version.TryParse(((DTE)serviceProvider.GetService(typeof(_DTE))).Version, out version))
             {
                 vsMajorVersion = version.Major;
             }
@@ -88,7 +86,7 @@
             return _tags;
         }
 
-        protected virtual void HandleParseComplete(object sender, ParseResultEventArgs e)
+        protected virtual void HandleParseComplete(object sender, InheritanceParseResultEventArgs e)
         {
             IEnumerable<ITagSpan<IInheritanceTag>> tags = NoTags;
 
