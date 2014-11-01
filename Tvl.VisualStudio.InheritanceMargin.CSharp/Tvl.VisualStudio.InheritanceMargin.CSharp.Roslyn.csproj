@@ -86,7 +86,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\External\Key.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\Reference\SharedKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeAnalysis">
@@ -220,8 +220,8 @@
     <Compile Include="TypeTarget.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\External\Key.snk">
-      <Link>Key.snk</Link>
+    <None Include="..\Reference\SharedKey.snk">
+      <Link>SharedKey.snk</Link>
     </None>
     <None Include="packages.Tvl.VisualStudio.InheritanceMargin.CSharp.Roslyn.config" />
   </ItemGroup>

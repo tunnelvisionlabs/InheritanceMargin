@@ -86,7 +86,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\External\Key.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\Reference\SharedKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="envdte, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -260,8 +260,8 @@
     <Compile Include="TypeTarget.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\External\Key.snk">
-      <Link>Key.snk</Link>
+    <None Include="..\Reference\SharedKey.snk">
+      <Link>SharedKey.snk</Link>
     </None>
     <None Include="packages.Tvl.VisualStudio.InheritanceMargin.CSharp.12.0.config" />
   </ItemGroup>

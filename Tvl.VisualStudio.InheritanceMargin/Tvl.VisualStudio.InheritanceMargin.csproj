@@ -108,7 +108,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>..\External\Key.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\Reference\SharedKey.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CommandTranslation\CommandId.cs" />
@@ -142,8 +142,8 @@
     <Content Include="VSIXImage_small.png">
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <None Include="..\External\Key.snk">
-      <Link>Key.snk</Link>
+    <None Include="..\Reference\SharedKey.snk">
+      <Link>SharedKey.snk</Link>
     </None>
     <None Include="packages.config" />
     <None Include="source.extension.vsixmanifest">
