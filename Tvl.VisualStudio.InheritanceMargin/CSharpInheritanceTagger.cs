@@ -66,12 +66,15 @@
 
             bool vs2010 = vsMajorVersion == 10;
             bool vs2012 = vsMajorVersion == 11;
+            bool vs14 = vsMajorVersion == 14;
 
             string assemblyName;
             if (vs2010)
                 assemblyName = "Tvl.VisualStudio.InheritanceMargin.CSharp.10.0";
             else if (vs2012)
                 assemblyName = "Tvl.VisualStudio.InheritanceMargin.CSharp.11.0";
+            else if (vs14)
+                assemblyName = "Tvl.VisualStudio.InheritanceMargin.CSharp.14.0";
             else if (RoslynUtilities.IsRoslynInstalled(serviceProvider))
                 assemblyName = "Tvl.VisualStudio.InheritanceMargin.CSharp.Roslyn";
             else

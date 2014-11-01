@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Tvl.VisualStudio.OutputWindow.2.0.0\build\Tvl.VisualStudio.OutputWindow.props" Condition="Exists('..\packages\Tvl.VisualStudio.OutputWindow.2.0.0\build\Tvl.VisualStudio.OutputWindow.props')" />
+  <Import Project="..\packages\Tvl.VisualStudio.OutputWindow.2.0.1\build\Tvl.VisualStudio.OutputWindow.props" Condition="Exists('..\packages\Tvl.VisualStudio.OutputWindow.2.0.1\build\Tvl.VisualStudio.OutputWindow.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -199,6 +199,11 @@
       <Name>Tvl.VisualStudio.InheritanceMargin.CSharp.12.0</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+    <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.14.0.csproj">
+      <Project>{7d84bb06-4c50-4eb4-abd5-71c63b0c2409}</Project>
+      <Name>Tvl.VisualStudio.InheritanceMargin.CSharp.14.0</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
     <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.Roslyn.csproj">
       <Project>{912f988e-c5d9-413a-9b81-86d0aa67947b}</Project>
       <Name>Tvl.VisualStudio.InheritanceMargin.CSharp.Roslyn</Name>
@@ -229,10 +234,10 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Tvl.VisualStudio.OutputWindow.2.0.0\build\Tvl.VisualStudio.OutputWindow.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Tvl.VisualStudio.OutputWindow.2.0.0\build\Tvl.VisualStudio.OutputWindow.props'))" />
-    <Error Condition="!Exists('..\packages\Tvl.VisualStudio.OutputWindow.2.0.0\build\Tvl.VisualStudio.OutputWindow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Tvl.VisualStudio.OutputWindow.2.0.0\build\Tvl.VisualStudio.OutputWindow.targets'))" />
+    <Error Condition="!Exists('..\packages\Tvl.VisualStudio.OutputWindow.2.0.1\build\Tvl.VisualStudio.OutputWindow.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Tvl.VisualStudio.OutputWindow.2.0.1\build\Tvl.VisualStudio.OutputWindow.props'))" />
+    <Error Condition="!Exists('..\packages\Tvl.VisualStudio.OutputWindow.2.0.1\build\Tvl.VisualStudio.OutputWindow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Tvl.VisualStudio.OutputWindow.2.0.1\build\Tvl.VisualStudio.OutputWindow.targets'))" />
   </Target>
-  <Import Project="..\packages\Tvl.VisualStudio.OutputWindow.2.0.0\build\Tvl.VisualStudio.OutputWindow.targets" Condition="Exists('..\packages\Tvl.VisualStudio.OutputWindow.2.0.0\build\Tvl.VisualStudio.OutputWindow.targets')" />
+  <Import Project="..\packages\Tvl.VisualStudio.OutputWindow.2.0.1\build\Tvl.VisualStudio.OutputWindow.targets" Condition="Exists('..\packages\Tvl.VisualStudio.OutputWindow.2.0.1\build\Tvl.VisualStudio.OutputWindow.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
