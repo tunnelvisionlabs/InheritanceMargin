@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
 using Tvl.VisualStudio.InheritanceMargin;
@@ -15,6 +16,7 @@ using Tvl.VisualStudio.InheritanceMargin;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en-US")]
+[assembly: CLSCompliant(false)]
 
 [assembly: ProvideBindingPath]
 [assembly: Guid("5B624A23-7F60-4086-87DF-1823E62418A7")]
