@@ -6,7 +6,7 @@
     <Version>2.2.0</Version>
     <Description xml:space="preserve">Show inheritance information in the glyph margin.</Description>
     <Locale>1033</Locale>
-    <License>Eula.rtf</License>
+    <License>LICENSE.txt</License>
     <Icon>VSIXImage_small.png</Icon>
     <PreviewImage>VSIXImage_large.png</PreviewImage>
     <SupportedProducts>
