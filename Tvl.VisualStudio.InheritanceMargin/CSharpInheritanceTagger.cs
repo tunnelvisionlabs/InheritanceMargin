@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Reflection;
     using Microsoft.VisualStudio.Shell;
@@ -26,8 +25,10 @@
 
         public CSharpInheritanceTagger(CSharpInheritanceTaggerProvider provider, ITextBuffer buffer)
         {
-            Contract.Requires<ArgumentNullException>(provider != null, "provider");
-            Contract.Requires<ArgumentNullException>(buffer != null, "buffer");
+            if (provider == null)
+                throw new ArgumentNullException("provider");
+            if (buffer == null)
+                throw new ArgumentNullException("buffer");
 
             this._provider = provider;
             this._buffer = buffer;
@@ -44,8 +45,10 @@
 
         internal static CSharpInheritanceTagger CreateInstance(CSharpInheritanceTaggerProvider provider, ITextBuffer buffer)
         {
-            Contract.Requires<ArgumentNullException>(provider != null, "provider");
-            Contract.Requires<ArgumentNullException>(buffer != null, "buffer");
+            if (provider == null)
+                throw new ArgumentNullException("provider");
+            if (buffer == null)
+                throw new ArgumentNullException("buffer");
 
             return buffer.Properties.GetOrCreateSingletonProperty(() => new CSharpInheritanceTagger(provider, buffer));
         }

@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.VisualStudio.Shell;
@@ -56,7 +55,8 @@
         public CSharpInheritanceAnalyzer(ITextBuffer textBuffer, TaskScheduler taskScheduler, ITextDocumentFactoryService textDocumentFactoryService, IOutputWindowService outputWindowService, SVsServiceProvider serviceProvider, IInheritanceTagFactory tagFactory)
             : base(textBuffer, taskScheduler, textDocumentFactoryService, outputWindowService)
         {
-            Contract.Requires<ArgumentNullException>(serviceProvider != null, "serviceProvider");
+            if (serviceProvider == null)
+                throw new ArgumentNullException("serviceProvider");
 
             _serviceProvider = serviceProvider;
             _tagFactory = tagFactory;

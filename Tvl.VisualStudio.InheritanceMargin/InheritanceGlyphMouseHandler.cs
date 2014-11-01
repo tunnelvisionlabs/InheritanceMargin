@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
@@ -31,9 +30,12 @@
 
         public InheritanceGlyphMouseHandler(InheritanceGlyphMouseHandlerProvider provider, IWpfTextViewHost textViewHost, IWpfTextViewMargin margin)
         {
-            Contract.Requires<ArgumentNullException>(provider != null, "provider");
-            Contract.Requires<ArgumentNullException>(textViewHost != null, "textViewHost");
-            Contract.Requires<ArgumentNullException>(margin != null, "margin");
+            if (provider == null)
+                throw new ArgumentNullException("provider");
+            if (textViewHost == null)
+                throw new ArgumentNullException("textViewHost");
+            if (margin == null)
+                throw new ArgumentNullException("margin");
 
             _provider = provider;
             _textViewHost = textViewHost;
