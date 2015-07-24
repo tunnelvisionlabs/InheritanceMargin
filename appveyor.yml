@@ -12,3 +12,6 @@ build:
   verbosity: minimal
 artifacts:
 - path: 'Tvl.VisualStudio.InheritanceMargin\bin\Release\Tvl.VisualStudio.InheritanceMargin.vsix'
+# preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
+cache:
+  - packages -> **\packages.config
