@@ -143,9 +143,7 @@
       <Private>False</Private>
       <HintPath>..\packages\VSSDK.DTE.7.0.3\lib\net20\stdole.dll</HintPath>
     </Reference>
-    <Reference Include="System">
-      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll</HintPath>
-    </Reference>
+    <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
