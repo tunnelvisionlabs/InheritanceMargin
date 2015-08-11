@@ -34,6 +34,7 @@
 
   <Content>
     <MefComponent>|%CurrentProject%|</MefComponent>
+    <MefComponent>|Tvl.VisualStudio.InheritanceMargin.Interfaces|</MefComponent>
     <VsPackage>|%CurrentProject%|</VsPackage>
   </Content>
 

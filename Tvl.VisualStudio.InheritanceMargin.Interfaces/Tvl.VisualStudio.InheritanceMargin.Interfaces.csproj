@@ -76,6 +76,7 @@
     <Compile Include="IInheritanceTarget.cs" />
     <Compile Include="InheritanceGlyph.cs" />
     <Compile Include="InheritanceParseResultEventArgs.cs" />
+    <Compile Include="MefBindingWorkaround.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
