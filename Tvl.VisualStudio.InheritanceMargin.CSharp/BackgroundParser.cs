@@ -27,8 +27,6 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
         private bool _dirty;
         private int _parsing;
 
-        public event EventHandler<InheritanceParseResultEventArgs> ParseComplete;
-
         [Obsolete]
         public BackgroundParser(ITextBuffer textBuffer, ITextDocumentFactoryService textDocumentFactoryService, IOutputWindowService outputWindowService)
             : this(textBuffer, TaskScheduler.Default, textDocumentFactoryService, outputWindowService, PredefinedOutputWindowPanes.TvlDiagnostics)
@@ -64,6 +62,8 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             this._timer = new Timer(ParseTimerCallback, null, _reparseDelay, _reparseDelay);
             this._lastEdit = DateTimeOffset.MinValue;
         }
+
+        public event EventHandler<InheritanceParseResultEventArgs> ParseComplete;
 
         public ITextBuffer TextBuffer
         {
@@ -117,12 +117,6 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             }
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
         public virtual string Name
         {
             get
@@ -145,6 +139,12 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             {
                 return _outputWindowService;
             }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         public void RequestParse(bool forceReparse)
