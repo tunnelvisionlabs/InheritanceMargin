@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RuleSet Name="TunnelVisionLabs.InheritanceMargin Code Analysis Rules" Description="Code Analysis Rules for TunnelVisionLabs.InheritanceMargin" ToolsVersion="14.0">
+  <Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp.Features" RuleNamespace="Microsoft.CodeAnalysis.CSharp.Features">
+    <Rule Id="IDE0003" Action="None" />
+  </Rules>
+  <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+    <Rule Id="SA1101" Action="None" />
+    <Rule Id="SA1202" Action="None" />
+    <Rule Id="SA1309" Action="None" />
+    <Rule Id="SA1412" Action="Warning" />
+    <Rule Id="SA1503" Action="None" />
+    <Rule Id="SA1609" Action="Warning" />
+    <Rule Id="SX1101" Action="Warning" />
+    <Rule Id="SX1309" Action="Warning" />
+    <Rule Id="SX1309S" Action="Warning" />
+  </Rules>
+</RuleSet>

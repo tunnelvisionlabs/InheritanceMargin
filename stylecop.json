@@ -1,0 +1,20 @@
+﻿{
+  "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
+  "settings": {
+    "orderingRules": {
+      // Ignore accessibility when evaluating element order
+      "elementOrder": [
+        "kind",
+        "constant",
+        "static",
+        "readonly"
+      ]
+    },
+    "documentationRules": {
+      "companyName": "Tunnel Vision Laboratories, LLC",
+      "copyrightText": "Copyright (c) {companyName}. All Rights Reserved.\nLicensed under the Microsoft Reciprocal License (MS-RL). See LICENSE in the project root for license information.",
+      "xmlHeader": false,
+      "fileNamingConvention": "metadata"
+    }
+  }
+}
