@@ -12,7 +12,7 @@
     using OleConstants = Microsoft.VisualStudio.OLE.Interop.Constants;
     using UICONTEXT = Microsoft.VisualStudio.VSConstants.UICONTEXT;
 
-    [Guid(InheritanceMarginConstants.guidInheritanceMarginPackageString)]
+    [Guid(InheritanceMarginConstants.GuidInheritanceMarginPackageString)]
     [PackageRegistration(UseManagedResourcesOnly = true)]
     [ProvideMenuResource(1000, 1)]
     internal class InheritanceMarginPackage : Package, IOleCommandTarget
