@@ -20,7 +20,7 @@
             TaskScheduler = TaskScheduler.Default;
         }
 
-        //[Import(PredefinedTaskSchedulers.BackgroundIntelliSense)]
+        ////[Import(PredefinedTaskSchedulers.BackgroundIntelliSense)]
         public TaskScheduler TaskScheduler
         {
             get;

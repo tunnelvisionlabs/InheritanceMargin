@@ -119,18 +119,18 @@
             }
             catch (ApplicationException)
             {
-                //_callHierarchy.LanguageService.DisplayErrorMessage(exception.Message);
+                ////_callHierarchy.LanguageService.DisplayErrorMessage(exception.Message);
                 return;
             }
             catch (InvalidOperationException)
             {
-                //this._callHierarchy.LanguageService.DisplayErrorMessage(exception2.Message);
+                ////this._callHierarchy.LanguageService.DisplayErrorMessage(exception2.Message);
                 return;
             }
 
             if (!result)
             {
-                //NativeMessageId.Create(this._callHierarchy.LanguageService, jrc_StringResource_identifiers.IDS_HIDDEN_DEFINITION, new object[0]).DisplayError(this._callHierarchy.LanguageService);
+                ////NativeMessageId.Create(this._callHierarchy.LanguageService, jrc_StringResource_identifiers.IDS_HIDDEN_DEFINITION, new object[0]).DisplayError(this._callHierarchy.LanguageService);
             }
         }
 
@@ -167,18 +167,18 @@
             }
             catch (ApplicationException)
             {
-                //_callHierarchy.LanguageService.DisplayErrorMessage(exception.Message);
+                ////_callHierarchy.LanguageService.DisplayErrorMessage(exception.Message);
                 return;
             }
             catch (InvalidOperationException)
             {
-                //this._callHierarchy.LanguageService.DisplayErrorMessage(exception2.Message);
+                ////this._callHierarchy.LanguageService.DisplayErrorMessage(exception2.Message);
                 return;
             }
 
             if (!result)
             {
-                //NativeMessageId.Create(this._callHierarchy.LanguageService, jrc_StringResource_identifiers.IDS_HIDDEN_DEFINITION, new object[0]).DisplayError(this._callHierarchy.LanguageService);
+                ////NativeMessageId.Create(this._callHierarchy.LanguageService, jrc_StringResource_identifiers.IDS_HIDDEN_DEFINITION, new object[0]).DisplayError(this._callHierarchy.LanguageService);
             }
         }
 
