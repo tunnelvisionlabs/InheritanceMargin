@@ -312,7 +312,7 @@
             }
             catch (InvalidOperationException)
             {
-                base.MarkDirty(true);
+                this.MarkDirty(true);
                 throw;
             }
         }

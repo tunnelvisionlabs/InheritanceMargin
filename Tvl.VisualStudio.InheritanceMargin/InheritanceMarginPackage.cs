@@ -99,7 +99,7 @@
 
         int IOleCommandTarget.Exec(ref Guid pguidCmdGroup, uint nCmdID, uint nCmdexecopt, IntPtr pvaIn, IntPtr pvaOut)
         {
-            IOleCommandTarget service = (IOleCommandTarget)base.GetService(typeof(IOleCommandTarget));
+            IOleCommandTarget service = (IOleCommandTarget)this.GetService(typeof(IOleCommandTarget));
             if (service != null)
                 return service.Exec(ref pguidCmdGroup, nCmdID, nCmdexecopt, pvaIn, pvaOut);
 
@@ -108,7 +108,7 @@
 
         int IOleCommandTarget.QueryStatus(ref Guid pguidCmdGroup, uint cCmds, OLECMD[] prgCmds, IntPtr pCmdText)
         {
-            IOleCommandTarget service = (IOleCommandTarget)base.GetService(typeof(IOleCommandTarget));
+            IOleCommandTarget service = (IOleCommandTarget)this.GetService(typeof(IOleCommandTarget));
             if (service != null)
                 return service.QueryStatus(ref pguidCmdGroup, cCmds, prgCmds, pCmdText);
 
