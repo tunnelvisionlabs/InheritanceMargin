@@ -1,4 +1,6 @@
-﻿namespace Tvl.VisualStudio.InheritanceMargin.CSharp
+﻿#if ROSLYN
+
+namespace Tvl.VisualStudio.InheritanceMargin.CSharp
 {
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.Text;
@@ -32,3 +34,5 @@
         }
     }
 }
+
+#endif

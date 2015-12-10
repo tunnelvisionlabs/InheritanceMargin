@@ -4,21 +4,22 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3AFF1709-477E-4C8A-AEC6-4D2E32A04097}</ProjectGuid>
+    <ProjectGuid>{FBB6E057-77DA-4FF6-A867-EF741971E511}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Tvl.VisualStudio.InheritanceMargin.CSharp</RootNamespace>
-    <AssemblyName>Tvl.VisualStudio.InheritanceMargin.CSharp.10.0</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <AssemblyName>Tvl.VisualStudio.InheritanceMargin.CSharp.12.0</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <BaseIntermediateOutputPath>obj\vs2010\</BaseIntermediateOutputPath>
+    <BaseIntermediateOutputPath>obj\vs2013\</BaseIntermediateOutputPath>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\vs2010\Debug\</OutputPath>
+    <OutputPath>bin\vs2013\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -26,7 +27,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\vs2010\Release\</OutputPath>
+    <OutputPath>bin\vs2013\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -49,41 +50,63 @@
       <HintPath>..\packages\VSSDK.DTE.8.8.0.3\lib\net20\envdte80.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.CallHierarchy.Package.Definitions">
-      <HintPath>..\packages\VSSDK.Language.CallHierarchy.10.10.0.3\lib\net40\Microsoft.VisualStudio.CallHierarchy.Package.Definitions.dll</HintPath>
+      <HintPath>..\packages\VSSDK.Language.CallHierarchy.12.12.0.3\lib\net45\Microsoft.VisualStudio.CallHierarchy.Package.Definitions.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Microsoft.VisualStudio.CoreUtility, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.VisualStudio.CoreUtility, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>False</Private>
-      <HintPath>..\packages\VSSDK.CoreUtility.10.0.3\lib\net40\Microsoft.VisualStudio.CoreUtility.dll</HintPath>
+      <HintPath>..\packages\VSSDK.CoreUtility.12.0.3\lib\net45\Microsoft.VisualStudio.CoreUtility.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.VisualStudio.CSharp.Services.Language, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.VisualStudio.CSharp.Services.Language, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>False</Private>
-      <HintPath>..\packages\VSSDK.Language.CSharp.10.10.0.3\lib\net40\Microsoft.VisualStudio.CSharp.Services.Language.dll</HintPath>
+      <HintPath>..\packages\VSSDK.Language.CSharp.12.12.0.3\lib\net45\Microsoft.VisualStudio.CSharp.Services.Language.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.CSharp.Services.Language.Interop">
-      <HintPath>..\packages\VSSDK.Language.CSharp.10.10.0.3\lib\net40\Microsoft.VisualStudio.CSharp.Services.Language.Interop.dll</HintPath>
+      <HintPath>..\packages\VSSDK.Language.CSharp.12.12.0.3\lib\net45\Microsoft.VisualStudio.CSharp.Services.Language.Interop.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Microsoft.VisualStudio.Language.CallHierarchy, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.VisualStudio.GraphModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>False</Private>
-      <HintPath>..\packages\VSSDK.Language.CallHierarchy.10.10.0.3\lib\net40\Microsoft.VisualStudio.Language.CallHierarchy.dll</HintPath>
+      <HintPath>..\packages\VSSDK.GraphModel.11.0.3\lib\net45\Microsoft.VisualStudio.GraphModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Language.CallHierarchy, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>False</Private>
+      <HintPath>..\packages\VSSDK.Language.CallHierarchy.12.12.0.3\lib\net45\Microsoft.VisualStudio.Language.CallHierarchy.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.OLE.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Private>False</Private>
       <HintPath>..\packages\VSSDK.OLE.Interop.7.0.3\lib\net20\Microsoft.VisualStudio.OLE.Interop.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.VisualStudio.Shell.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.VisualStudio.Shell.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>False</Private>
-      <HintPath>..\packages\VSSDK.Shell.10.10.0.3\lib\net40\Microsoft.VisualStudio.Shell.10.0.dll</HintPath>
+      <HintPath>..\packages\VSSDK.Shell.12.12.0.3\lib\net45\Microsoft.VisualStudio.Shell.12.0.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.Shell.Immutable.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>False</Private>
       <HintPath>..\packages\VSSDK.Shell.Immutable.10.10.0.3\lib\net40\Microsoft.VisualStudio.Shell.Immutable.10.0.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Immutable.11.0, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>False</Private>
+      <HintPath>..\packages\VSSDK.Shell.Immutable.11.11.0.3\lib\net45\Microsoft.VisualStudio.Shell.Immutable.11.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Immutable.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <Private>False</Private>
+      <HintPath>..\packages\VSSDK.Shell.Immutable.12.12.0.3\lib\net45\Microsoft.VisualStudio.Shell.Immutable.12.0.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Private>False</Private>
       <HintPath>..\packages\VSSDK.Shell.Interop.7.0.3\lib\net20\Microsoft.VisualStudio.Shell.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>False</Private>
+      <HintPath>..\packages\VSSDK.Shell.Interop.10.10.0.3\lib\net20\Microsoft.VisualStudio.Shell.Interop.10.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.11.0, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>False</Private>
+      <HintPath>..\packages\VSSDK.Shell.Interop.11.11.0.3\lib\net20\Microsoft.VisualStudio.Shell.Interop.11.0.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.Shell.Interop.8.0, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Private>False</Private>
@@ -93,21 +116,21 @@
       <Private>False</Private>
       <HintPath>..\packages\VSSDK.Shell.Interop.9.9.0.3\lib\net20\Microsoft.VisualStudio.Shell.Interop.9.0.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.VisualStudio.Text.Data, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.VisualStudio.Text.Data, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>False</Private>
-      <HintPath>..\packages\VSSDK.Text.10.0.3\lib\net40\Microsoft.VisualStudio.Text.Data.dll</HintPath>
+      <HintPath>..\packages\VSSDK.Text.12.0.3\lib\net45\Microsoft.VisualStudio.Text.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.VisualStudio.Text.Logic, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.VisualStudio.Text.Logic, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>False</Private>
-      <HintPath>..\packages\VSSDK.Text.10.0.3\lib\net40\Microsoft.VisualStudio.Text.Logic.dll</HintPath>
+      <HintPath>..\packages\VSSDK.Text.12.0.3\lib\net45\Microsoft.VisualStudio.Text.Logic.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.VisualStudio.Text.UI, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.VisualStudio.Text.UI, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>False</Private>
-      <HintPath>..\packages\VSSDK.Text.10.0.3\lib\net40\Microsoft.VisualStudio.Text.UI.dll</HintPath>
+      <HintPath>..\packages\VSSDK.Text.12.0.3\lib\net45\Microsoft.VisualStudio.Text.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.VisualStudio.Text.UI.Wpf, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.VisualStudio.Text.UI.Wpf, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <Private>False</Private>
-      <HintPath>..\packages\VSSDK.Text.10.0.3\lib\net40\Microsoft.VisualStudio.Text.UI.Wpf.dll</HintPath>
+      <HintPath>..\packages\VSSDK.Text.12.0.3\lib\net45\Microsoft.VisualStudio.Text.UI.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.TextManager.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Private>False</Private>
@@ -126,13 +149,19 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="Tvl.VisualStudio.OutputWindow.Interfaces">
       <HintPath>..\packages\Tvl.VisualStudio.OutputWindow.Interfaces.2.0.0\lib\net40\Tvl.VisualStudio.OutputWindow.Interfaces.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -142,11 +171,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BackgroundParser.cs" />
+    <Compile Include="..\Tvl.VisualStudio.InheritanceMargin.CSharp\BackgroundParser.cs">
+      <Link>BackgroundParser.cs</Link>
+    </Compile>
+    <Compile Include="..\Tvl.VisualStudio.InheritanceMargin.CSharp\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="CSharpInheritanceAnalyzer.cs" />
     <Compile Include="CSharpMemberIdentifierEqualityComparer.cs" />
     <Compile Include="MemberTarget.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecializedMatchingMemberCollector.cs" />
     <Compile Include="TypeCollector.cs" />
     <Compile Include="TypeDeclarationNodeSelector.cs" />
@@ -156,7 +189,7 @@
     <None Include="..\Reference\SharedKey.snk">
       <Link>SharedKey.snk</Link>
     </None>
-    <None Include="packages.Tvl.VisualStudio.InheritanceMargin.CSharp.10.0.config" />
+    <None Include="packages.Tvl.VisualStudio.InheritanceMargin.CSharp.12.0.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
