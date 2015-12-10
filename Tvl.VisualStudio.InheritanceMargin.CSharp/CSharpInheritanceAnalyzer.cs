@@ -111,7 +111,7 @@
                             foreach (ISymbol member in namedTypeSymbol.GetMembers())
                             {
                                 ISymbol implementation = typeSymbol.FindImplementationForInterfaceMember(member);
-                                if (implementation == null || !(implementation.ContainingSymbol.Equals(typeSymbol)))
+                                if (implementation == null || !implementation.ContainingSymbol.Equals(typeSymbol))
                                     continue;
 
                                 ISet<ISymbol> symbols;
