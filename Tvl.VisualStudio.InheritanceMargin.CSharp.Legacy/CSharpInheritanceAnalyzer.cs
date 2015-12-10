@@ -334,10 +334,13 @@
 
                         // methods which this method implements
                         ISet<CSharpMemberIdentifier> implementedMethods = collector.GetImplementedInterfaceMembers(member.SymbolicIdentifier);
+
                         // methods which this method overrides
                         ISet<CSharpMemberIdentifier> overriddenMethods = collector.GetOverriddenBaseMembers(member.SymbolicIdentifier);
+
                         // methods which override this method
                         ISet<CSharpMemberIdentifier> overridingMethods = collector.GetOverridersFromDerivedTypes(member.SymbolicIdentifier);
+
                         // methods which implement this method
                         ISet<CSharpMemberIdentifier> implementingMethods = collector.GetImplementorsForInterfaceMember(member.SymbolicIdentifier);
 
