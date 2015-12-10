@@ -64,7 +64,7 @@
 
         public void ShowContextMenu(MouseEventArgs e)
         {
-            CommandRouter.DisplayContextMenu(InheritanceMarginConstants.guidInheritanceMarginCommandSet, InheritanceMarginConstants.menuInheritanceTargets, _marginGlyph);
+            CommandRouter.DisplayContextMenu(InheritanceMarginConstants.GuidInheritanceMarginCommandSet, InheritanceMarginConstants.MenuInheritanceTargets, _marginGlyph);
         }
 
         public void HandleExecutedInheritanceTargetsList(object sender, ExecutedRoutedEventArgs e)
@@ -72,7 +72,7 @@
             CommandTargetParameters parameter = e.Parameter as CommandTargetParameters;
             if (parameter != null)
             {
-                int index = parameter.Id - InheritanceMarginConstants.cmdidInheritanceTargetsList;
+                int index = parameter.Id - InheritanceMarginConstants.CmdidInheritanceTargetsList;
                 Targets[index].NavigateTo();
             }
         }
@@ -82,7 +82,7 @@
             CommandTargetParameters parameter = e.Parameter as CommandTargetParameters;
             if (parameter != null)
             {
-                int index = parameter.Id - InheritanceMarginConstants.cmdidInheritanceTargetsList;
+                int index = parameter.Id - InheritanceMarginConstants.CmdidInheritanceTargetsList;
                 if (index < Targets.Count)
                 {
                     e.CanExecute = true;

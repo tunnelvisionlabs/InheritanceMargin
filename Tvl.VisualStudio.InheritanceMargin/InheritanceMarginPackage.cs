@@ -71,7 +71,7 @@
 
         private void DefineRoutableCommands()
         {
-            DefineRoutableCommand("InheritanceTargetsList", InheritanceMarginConstants.guidInheritanceMarginCommandSet, InheritanceMarginConstants.cmdidInheritanceTargetsList, InheritanceMarginConstants.cmdidInheritanceTargetsListEnd);
+            DefineRoutableCommand("InheritanceTargetsList", InheritanceMarginConstants.GuidInheritanceMarginCommandSet, InheritanceMarginConstants.CmdidInheritanceTargetsList, InheritanceMarginConstants.CmdidInheritanceTargetsListEnd);
         }
 
         private void DefineRoutableCommand(string propertyName, Guid guid, int startId, int endId)
