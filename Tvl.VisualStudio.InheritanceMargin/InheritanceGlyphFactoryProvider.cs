@@ -27,8 +27,6 @@
             set;
         }
 
-        #region IGlyphFactoryProvider Members
-
         public IGlyphFactory GetGlyphFactory(IWpfTextView view, IWpfTextViewMargin margin)
         {
             if (view == null || margin == null)
@@ -45,7 +43,5 @@
 
             return new InheritanceGlyphFactory(this, view, margin);
         }
-
-        #endregion
     }
 }

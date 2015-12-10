@@ -163,8 +163,6 @@
                 }
             }
 
-            #region IOleCommandTarget Members
-
             public int Exec(ref Guid pguidCmdGroup, uint nCmdID, uint nCmdexecopt, IntPtr pvaIn, IntPtr pvaOut)
             {
                 return RouteExec(Route, ref pguidCmdGroup, nCmdID, nCmdexecopt, pvaIn, pvaOut);
@@ -174,8 +172,6 @@
             {
                 return RouteQueryStatus(Route, ref pguidCmdGroup, cCmds, prgCmds, pCmdText);
             }
-
-            #endregion
         }
     }
 }

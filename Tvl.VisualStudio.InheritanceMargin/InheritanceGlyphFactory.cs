@@ -22,8 +22,6 @@
             this._margin = margin;
         }
 
-        #region IGlyphFactory Members
-
         public UIElement GenerateGlyph(IWpfTextViewLine line, IGlyphTag tag)
         {
             InheritanceTag inheritanceTag = tag as InheritanceTag;
@@ -76,7 +74,5 @@
 
             return image;
         }
-
-        #endregion
     }
 }

@@ -48,8 +48,6 @@
             private set;
         }
 
-        #region ITaggerProvider Members
-
         public ITagger<T> CreateTagger<T>(ITextBuffer buffer) where T : ITag
         {
             if (buffer != null)
@@ -57,7 +55,5 @@
 
             return null;
         }
-
-        #endregion
     }
 }
