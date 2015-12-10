@@ -49,7 +49,11 @@
             return RouteExec(
                 (args, command) => command.CanExecute(args, routing),
                 (args, command) => command.Execute(args, routing),
-                ref pguidCmdGroup, nCmdID, nCmdexecopt, pvaIn, pvaOut);
+                ref pguidCmdGroup,
+                nCmdID,
+                nCmdexecopt,
+                pvaIn,
+                pvaOut);
         }
 
         private static int RouteExec(Func<CommandTargetParameters, RoutedCommand, bool> canExecuteFunc, Action<CommandTargetParameters, RoutedCommand> executeFunc, ref Guid pguidCmdGroup, uint nCmdID, uint nCmdexecopt, IntPtr pvaIn, IntPtr pvaOut)
