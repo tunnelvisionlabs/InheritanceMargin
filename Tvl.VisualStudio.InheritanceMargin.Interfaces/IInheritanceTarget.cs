@@ -11,6 +11,9 @@ namespace Tvl.VisualStudio.InheritanceMargin
         /// <summary>
         /// Gets the display name of the target of the inheritance relation.
         /// </summary>
+        /// <value>
+        /// The display name of the target of the inheritance relation.
+        /// </value>
         string DisplayName
         {
             get;

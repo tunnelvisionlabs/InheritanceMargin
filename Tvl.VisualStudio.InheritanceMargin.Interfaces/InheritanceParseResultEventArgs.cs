@@ -34,6 +34,9 @@ namespace Tvl.VisualStudio.InheritanceMargin
         /// <summary>
         /// Gets the text snapshot which was analyzed.
         /// </summary>
+        /// <value>
+        /// The <see cref="ITextSnapshot"/> which was analyzed.
+        /// </value>
         public ITextSnapshot Snapshot
         {
             get
@@ -45,6 +48,9 @@ namespace Tvl.VisualStudio.InheritanceMargin
         /// <summary>
         /// Gets the total time taken to analyze the snapshot.
         /// </summary>
+        /// <value>
+        /// The total time taken to analyze the snapshot.
+        /// </value>
         public TimeSpan ElapsedTime
         {
             get
@@ -57,6 +63,10 @@ namespace Tvl.VisualStudio.InheritanceMargin
         /// Gets a collection of inheritance tags describing the inheritance relations of types and members located
         /// within the snapshot.
         /// </summary>
+        /// <value>
+        /// A collection of inheritance tags describing the inheritance relations of types and members located within
+        /// the snapshot.
+        /// </value>
         public IEnumerable<ITagSpan<IInheritanceTag>> Tags
         {
             get
