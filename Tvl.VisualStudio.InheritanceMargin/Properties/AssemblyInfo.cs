@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
+// Licensed under the Microsoft Reciprocal License (MS-RL). See LICENSE in the project root for license information.
+
+using System;
 using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
