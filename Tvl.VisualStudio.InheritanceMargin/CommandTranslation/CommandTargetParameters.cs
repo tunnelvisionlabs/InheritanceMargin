@@ -7,8 +7,8 @@ namespace Tvl.VisualStudio.InheritanceMargin.CommandTranslation
     {
         private CommandTargetParameters(string text, int id)
         {
-            this.Text = text;
-            this.Id = id;
+            Text = text;
+            Id = id;
         }
 
         public bool Enabled

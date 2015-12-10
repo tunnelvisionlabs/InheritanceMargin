@@ -26,9 +26,9 @@ namespace Tvl.VisualStudio.InheritanceMargin
         /// <param name="tags">A collection of inheritance tags collected for the snapshot.</param>
         public InheritanceParseResultEventArgs(ITextSnapshot snapshot, TimeSpan elapsedTime, IEnumerable<ITagSpan<IInheritanceTag>> tags)
         {
-            this._snapshot = snapshot;
-            this._elapsedTime = elapsedTime;
-            this._tags = tags;
+            _snapshot = snapshot;
+            _elapsedTime = elapsedTime;
+            _tags = tags;
         }
 
         /// <summary>

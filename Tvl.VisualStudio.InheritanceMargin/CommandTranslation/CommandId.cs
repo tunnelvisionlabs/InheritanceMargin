@@ -18,9 +18,9 @@ namespace Tvl.VisualStudio.InheritanceMargin.CommandTranslation
 
         public CommandId(Guid menuGroup, int startID, int endID)
         {
-            this.Guid = menuGroup;
-            this.Id = startID;
-            this.EndId = endID;
+            Guid = menuGroup;
+            Id = startID;
+            EndId = endID;
         }
 
         public int EndId

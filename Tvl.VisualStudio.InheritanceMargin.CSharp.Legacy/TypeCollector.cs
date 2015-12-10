@@ -14,19 +14,19 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
 
         public TypeCollector(ParseTreeNode node)
         {
-            this.Visit(node);
+            Visit(node);
         }
 
         /// <inheritdoc/>
         public IEnumerator<ParseTreeNode> GetEnumerator()
         {
-            return this._nodes.GetEnumerator();
+            return _nodes.GetEnumerator();
         }
 
         /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
 
         /// <inheritdoc/>
@@ -75,13 +75,13 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
         /// <inheritdoc/>
         public override void VisitNamespaceDeclarationNode(NamespaceDeclarationNode node)
         {
-            this.VisitList<ParseTreeNode>(node.NamespaceMemberDeclarations);
+            VisitList<ParseTreeNode>(node.NamespaceMemberDeclarations);
         }
 
         /// <inheritdoc/>
         public override void VisitNestedTypeDeclarationNode(NestedTypeDeclarationNode node)
         {
-            this.Visit(node.Type);
+            Visit(node.Type);
         }
 
         /// <inheritdoc/>
@@ -102,11 +102,11 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
         /// <inheritdoc/>
         public override void VisitTypeDeclarationNode(TypeDeclarationNode node)
         {
-            this._nodes.Add(node);
+            _nodes.Add(node);
 
             for (MemberDeclarationNode node2 = node.MemberDeclarations; node2 != null; node2 = node2.Next)
             {
-                this.Visit(node2);
+                Visit(node2);
             }
         }
     }

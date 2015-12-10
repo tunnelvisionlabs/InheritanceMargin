@@ -161,7 +161,7 @@ namespace Tvl.VisualStudio.InheritanceMargin
 
         private ITextViewLine GetTextViewLine(double y)
         {
-            IWpfTextView textView = this._textViewHost.TextView;
+            IWpfTextView textView = _textViewHost.TextView;
             ITextViewLine textViewLineContainingYCoordinate = textView.TextViewLines.GetTextViewLineContainingYCoordinate(y);
             if (textViewLineContainingYCoordinate == null)
                 textViewLineContainingYCoordinate = (y <= textView.TextViewLines[0].Top) ? textView.TextViewLines.FirstVisibleLine : textView.TextViewLines.LastVisibleLine;
@@ -223,9 +223,9 @@ namespace Tvl.VisualStudio.InheritanceMargin
             if (_mouseHoverTimer != null && _mouseHoverTimer.IsEnabled && _margin.Enabled)
             {
                 ITextViewLine textViewLineContainingYCoordinate = _textViewHost.TextView.TextViewLines.GetTextViewLineContainingYCoordinate(point.Y + _textViewHost.TextView.ViewportTop);
-                if (textViewLineContainingYCoordinate != this._lastHoverPosition)
+                if (textViewLineContainingYCoordinate != _lastHoverPosition)
                 {
-                    this._lastHoverPosition = textViewLineContainingYCoordinate;
+                    _lastHoverPosition = textViewLineContainingYCoordinate;
                     if (textViewLineContainingYCoordinate != null)
                     {
                         string str = null;
@@ -237,7 +237,7 @@ namespace Tvl.VisualStudio.InheritanceMargin
 
                         if (!string.IsNullOrEmpty(str))
                         {
-                            this._popup.Child = null;
+                            _popup.Child = null;
                             TextBlock block = new TextBlock
                             {
                                 Text = str,

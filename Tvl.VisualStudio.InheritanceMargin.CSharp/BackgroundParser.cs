@@ -49,18 +49,18 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             if (outputWindowService == null)
                 throw new ArgumentNullException("outputWindowService");
 
-            this._textBuffer = new WeakReference(textBuffer);
-            this._taskScheduler = taskScheduler;
-            this._textDocumentFactoryService = textDocumentFactoryService;
-            this._outputWindowService = outputWindowService;
-            this._outputWindowName = outputPaneName;
+            _textBuffer = new WeakReference(textBuffer);
+            _taskScheduler = taskScheduler;
+            _textDocumentFactoryService = textDocumentFactoryService;
+            _outputWindowService = outputWindowService;
+            _outputWindowName = outputPaneName;
 
             textBuffer.PostChanged += TextBufferPostChanged;
 
-            this._dirty = true;
-            this._reparseDelay = TimeSpan.FromMilliseconds(1500);
-            this._timer = new Timer(ParseTimerCallback, null, _reparseDelay, _reparseDelay);
-            this._lastEdit = DateTimeOffset.MinValue;
+            _dirty = true;
+            _reparseDelay = TimeSpan.FromMilliseconds(1500);
+            _timer = new Timer(ParseTimerCallback, null, _reparseDelay, _reparseDelay);
+            _lastEdit = DateTimeOffset.MinValue;
         }
 
         /// <inheritdoc/>
@@ -183,8 +183,8 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
 
         protected void MarkDirty(bool resetTimer)
         {
-            this._dirty = true;
-            this._lastEdit = DateTimeOffset.Now;
+            _dirty = true;
+            _lastEdit = DateTimeOffset.Now;
 
             if (resetTimer)
                 _timer.Change(_reparseDelay, _reparseDelay);

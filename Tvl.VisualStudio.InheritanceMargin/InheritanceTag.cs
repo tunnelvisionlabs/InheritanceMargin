@@ -23,9 +23,9 @@ namespace Tvl.VisualStudio.InheritanceMargin
 
         public InheritanceTag(InheritanceGlyph glyph, string tooltip, List<IInheritanceTarget> members)
         {
-            this._glyph = glyph;
-            this._tooltip = tooltip;
-            this._targets = members;
+            _glyph = glyph;
+            _tooltip = tooltip;
+            _targets = members;
         }
 
         public InheritanceGlyph Glyph

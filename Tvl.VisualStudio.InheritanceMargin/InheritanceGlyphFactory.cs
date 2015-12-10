@@ -20,9 +20,9 @@ namespace Tvl.VisualStudio.InheritanceMargin
 
         public InheritanceGlyphFactory(InheritanceGlyphFactoryProvider provider, IWpfTextView view, IWpfTextViewMargin margin)
         {
-            this._provider = provider;
-            this._view = view;
-            this._margin = margin;
+            _provider = provider;
+            _view = view;
+            _margin = margin;
         }
 
         /// <inheritdoc/>

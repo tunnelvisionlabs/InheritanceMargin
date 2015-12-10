@@ -31,15 +31,15 @@ namespace Tvl.VisualStudio.InheritanceMargin
             if (buffer == null)
                 throw new ArgumentNullException("buffer");
 
-            this._provider = provider;
-            this._buffer = buffer;
+            _provider = provider;
+            _buffer = buffer;
 
             if (_analyzerType == null)
                 _analyzerType = LoadAnalyzerType(provider.GlobalServiceProvider);
 
-            this._analyzer = (IInheritanceParser)Activator.CreateInstance(_analyzerType, buffer, provider.TaskScheduler, provider.TextDocumentFactoryService, provider.OutputWindowService, provider.GlobalServiceProvider, new InheritanceTagFactory());
-            this._analyzer.ParseComplete += HandleParseComplete;
-            this._analyzer.RequestParse(false);
+            _analyzer = (IInheritanceParser)Activator.CreateInstance(_analyzerType, buffer, provider.TaskScheduler, provider.TextDocumentFactoryService, provider.OutputWindowService, provider.GlobalServiceProvider, new InheritanceTagFactory());
+            _analyzer.ParseComplete += HandleParseComplete;
+            _analyzer.RequestParse(false);
         }
 
         /// <inheritdoc/>

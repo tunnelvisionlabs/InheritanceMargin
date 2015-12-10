@@ -319,7 +319,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             }
             catch (InvalidOperationException)
             {
-                this.MarkDirty(true);
+                MarkDirty(true);
                 throw;
             }
         }

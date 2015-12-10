@@ -157,7 +157,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CommandTranslation
 
             public ContextMenuRouter(IInputElement route)
             {
-                this._route = route;
+                _route = route;
             }
 
             public IInputElement Route
