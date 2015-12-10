@@ -188,7 +188,6 @@
                         IMethodSymbol methodSymbol = symbol as IMethodSymbol;
                         if (methodSymbol != null)
                         {
-
                             // methods which this method overrides
                             for (IMethodSymbol current = methodSymbol.OverriddenMethod;
                             current != null;
