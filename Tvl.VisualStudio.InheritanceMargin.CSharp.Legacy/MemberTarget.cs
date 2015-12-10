@@ -14,6 +14,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             _memberIdentifier = memberIdentifier;
         }
 
+        /// <inheritdoc/>
         public string DisplayName
         {
             get
@@ -22,6 +23,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             }
         }
 
+        /// <inheritdoc/>
         public void NavigateTo()
         {
             CSharpInheritanceAnalyzer.NavigateToMember(_memberIdentifier);

@@ -18,11 +18,13 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             }
         }
 
+        /// <inheritdoc/>
         public override bool TraverseInteriorTree(ParseTreeNode node)
         {
             return false;
         }
 
+        /// <inheritdoc/>
         public override void VisitTypeDeclarationNode(TypeDeclarationNode node)
         {
             _nodes.Add(node);

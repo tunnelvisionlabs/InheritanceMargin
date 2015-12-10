@@ -21,6 +21,7 @@ namespace Tvl.VisualStudio.InheritanceMargin
             private set;
         }
 
+        /// <inheritdoc/>
         public IMouseProcessor GetAssociatedMouseProcessor(IWpfTextViewHost wpfTextViewHost, IWpfTextViewMargin margin)
         {
             return new InheritanceGlyphMouseHandler(this, wpfTextViewHost, margin);

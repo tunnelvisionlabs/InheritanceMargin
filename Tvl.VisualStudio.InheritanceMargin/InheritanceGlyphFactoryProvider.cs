@@ -30,6 +30,7 @@ namespace Tvl.VisualStudio.InheritanceMargin
             set;
         }
 
+        /// <inheritdoc/>
         public IGlyphFactory GetGlyphFactory(IWpfTextView view, IWpfTextViewMargin margin)
         {
             if (view == null || margin == null)

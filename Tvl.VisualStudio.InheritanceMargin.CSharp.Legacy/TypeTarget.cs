@@ -16,6 +16,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             _typeIdentifier = typeIdentifier;
         }
 
+        /// <inheritdoc/>
         public string DisplayName
         {
             get
@@ -24,6 +25,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             }
         }
 
+        /// <inheritdoc/>
         public void NavigateTo()
         {
             CSharpInheritanceAnalyzer.NavigateToType(_typeIdentifier);

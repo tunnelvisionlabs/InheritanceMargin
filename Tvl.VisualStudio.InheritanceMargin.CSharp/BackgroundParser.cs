@@ -63,6 +63,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             this._lastEdit = DateTimeOffset.MinValue;
         }
 
+        /// <inheritdoc/>
         public event EventHandler<InheritanceParseResultEventArgs> ParseComplete;
 
         public ITextBuffer TextBuffer
@@ -141,12 +142,14 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             }
         }
 
+        /// <inheritdoc/>
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
+        /// <inheritdoc/>
         public void RequestParse(bool forceReparse)
         {
             TryReparse(forceReparse);

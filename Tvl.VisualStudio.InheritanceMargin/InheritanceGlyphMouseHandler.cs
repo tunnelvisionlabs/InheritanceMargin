@@ -54,16 +54,19 @@ namespace Tvl.VisualStudio.InheritanceMargin
             _textViewHost.Closed += (sender, e) => _glyphTagAggregator.Dispose();
         }
 
+        /// <inheritdoc/>
         public override void PostprocessMouseEnter(MouseEventArgs e)
         {
             EnableToolTips();
         }
 
+        /// <inheritdoc/>
         public override void PostprocessMouseLeave(MouseEventArgs e)
         {
             DisableToolTips();
         }
 
+        /// <inheritdoc/>
         public override void PostprocessMouseRightButtonUp(MouseButtonEventArgs e)
         {
             Point mouseLocationInTextView = GetMouseLocationInTextView(e);
@@ -84,6 +87,7 @@ namespace Tvl.VisualStudio.InheritanceMargin
             }
         }
 
+        /// <inheritdoc/>
         public override void PostprocessMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             _clickLocation = GetMouseLocationInTextView(e);
@@ -92,6 +96,7 @@ namespace Tvl.VisualStudio.InheritanceMargin
                 HandleDragStart(_clickLocation);
         }
 
+        /// <inheritdoc/>
         public override void PostprocessMouseLeftButtonUp(MouseButtonEventArgs e)
         {
             Point mouseLocationInTextView = GetMouseLocationInTextView(e);
@@ -108,6 +113,7 @@ namespace Tvl.VisualStudio.InheritanceMargin
             }
         }
 
+        /// <inheritdoc/>
         public override void PreprocessMouseMove(MouseEventArgs e)
         {
             Point mouseLocationInTextView = GetMouseLocationInTextView(e);

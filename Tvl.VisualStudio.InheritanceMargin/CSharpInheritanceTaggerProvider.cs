@@ -51,6 +51,7 @@ namespace Tvl.VisualStudio.InheritanceMargin
             private set;
         }
 
+        /// <inheritdoc/>
         public ITagger<T> CreateTagger<T>(ITextBuffer buffer)
             where T : ITag
         {

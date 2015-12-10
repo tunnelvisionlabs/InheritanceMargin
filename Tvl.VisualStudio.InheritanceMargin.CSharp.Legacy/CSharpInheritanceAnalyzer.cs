@@ -40,6 +40,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             _tagFactory = tagFactory;
         }
 
+        /// <inheritdoc/>
         public override string Name
         {
             get
@@ -227,6 +228,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             return fieldDeclarationNode.VariableDeclarators;
         }
 
+        /// <inheritdoc/>
         protected override void ReParseImpl()
         {
             Stopwatch stopwatch = Stopwatch.StartNew();

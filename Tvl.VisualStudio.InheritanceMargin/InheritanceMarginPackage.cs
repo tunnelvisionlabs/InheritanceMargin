@@ -66,6 +66,7 @@ namespace Tvl.VisualStudio.InheritanceMargin
             return null;
         }
 
+        /// <inheritdoc/>
         protected override void Initialize()
         {
             base.Initialize();
@@ -100,6 +101,7 @@ namespace Tvl.VisualStudio.InheritanceMargin
             _definedCommandTable.Add(new CommandId(guid, startId, endId), command);
         }
 
+        /// <inheritdoc/>
         int IOleCommandTarget.Exec(ref Guid pguidCmdGroup, uint nCmdID, uint nCmdexecopt, IntPtr pvaIn, IntPtr pvaOut)
         {
             IOleCommandTarget service = (IOleCommandTarget)this.GetService(typeof(IOleCommandTarget));
@@ -109,6 +111,7 @@ namespace Tvl.VisualStudio.InheritanceMargin
             return (int)OleConstants.MSOCMDERR_E_NOTSUPPORTED;
         }
 
+        /// <inheritdoc/>
         int IOleCommandTarget.QueryStatus(ref Guid pguidCmdGroup, uint cCmds, OLECMD[] prgCmds, IntPtr pCmdText)
         {
             IOleCommandTarget service = (IOleCommandTarget)this.GetService(typeof(IOleCommandTarget));

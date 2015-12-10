@@ -25,6 +25,7 @@ namespace Tvl.VisualStudio.InheritanceMargin
             this._margin = margin;
         }
 
+        /// <inheritdoc/>
         public UIElement GenerateGlyph(IWpfTextViewLine line, IGlyphTag tag)
         {
             InheritanceTag inheritanceTag = tag as InheritanceTag;

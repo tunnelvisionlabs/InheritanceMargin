@@ -38,6 +38,7 @@ namespace Tvl.VisualStudio.InheritanceMargin
             return new Guid(((GuidAttribute)attributesData[0]).Value);
         }
 
+        /// <inheritdoc/>
         public override void Register(RegistrationContext context)
         {
             if (context == null)
@@ -49,6 +50,7 @@ namespace Tvl.VisualStudio.InheritanceMargin
             }
         }
 
+        /// <inheritdoc/>
         public override void Unregister(RegistrationContext context)
         {
             if (context == null)

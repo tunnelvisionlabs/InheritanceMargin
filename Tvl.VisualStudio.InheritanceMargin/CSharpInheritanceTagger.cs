@@ -42,6 +42,7 @@ namespace Tvl.VisualStudio.InheritanceMargin
             this._analyzer.RequestParse(false);
         }
 
+        /// <inheritdoc/>
         public event EventHandler<SnapshotSpanEventArgs> TagsChanged;
 
         internal static CSharpInheritanceTagger CreateInstance(CSharpInheritanceTaggerProvider provider, ITextBuffer buffer)
@@ -87,6 +88,7 @@ namespace Tvl.VisualStudio.InheritanceMargin
             return assembly.GetType("Tvl.VisualStudio.InheritanceMargin.CSharp.CSharpInheritanceAnalyzer");
         }
 
+        /// <inheritdoc/>
         public IEnumerable<ITagSpan<IInheritanceTag>> GetTags(NormalizedSnapshotSpanCollection spans)
         {
             return _tags;

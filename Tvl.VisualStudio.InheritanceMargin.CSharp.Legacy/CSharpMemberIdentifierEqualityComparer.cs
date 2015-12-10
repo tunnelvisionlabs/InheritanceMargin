@@ -8,6 +8,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
 
     internal class CSharpMemberIdentifierEqualityComparer : IEqualityComparer<CSharpMemberIdentifier>
     {
+        /// <inheritdoc/>
         public bool Equals(CSharpMemberIdentifier left, CSharpMemberIdentifier right)
         {
             if (object.ReferenceEquals(left, right))
@@ -19,6 +20,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             return left.Equals(right);
         }
 
+        /// <inheritdoc/>
         public int GetHashCode(CSharpMemberIdentifier identifier)
         {
             return identifier.GetHashCode();
