@@ -8,12 +8,22 @@ namespace Tvl.VisualStudio.InheritanceMargin
     using Microsoft.VisualStudio.Text;
     using Microsoft.VisualStudio.Text.Tagging;
 
+    /// <summary>
+    /// Represents the result of a background parse operation which collections information about type and member
+    /// inheritance.
+    /// </summary>
     public class InheritanceParseResultEventArgs : EventArgs
     {
         private readonly ITextSnapshot _snapshot;
         private readonly TimeSpan _elapsedTime;
         private readonly IEnumerable<ITagSpan<IInheritanceTag>> _tags;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="InheritanceParseResultEventArgs"/> class.
+        /// </summary>
+        /// <param name="snapshot">The snapshot which was analyzed.</param>
+        /// <param name="elapsedTime">The total time taken to analyze the snapshot.</param>
+        /// <param name="tags">A collection of inheritance tags collected for the snapshot.</param>
         public InheritanceParseResultEventArgs(ITextSnapshot snapshot, TimeSpan elapsedTime, IEnumerable<ITagSpan<IInheritanceTag>> tags)
         {
             this._snapshot = snapshot;
@@ -21,6 +31,9 @@ namespace Tvl.VisualStudio.InheritanceMargin
             this._tags = tags;
         }
 
+        /// <summary>
+        /// Gets the text snapshot which was analyzed.
+        /// </summary>
         public ITextSnapshot Snapshot
         {
             get
@@ -29,6 +42,9 @@ namespace Tvl.VisualStudio.InheritanceMargin
             }
         }
 
+        /// <summary>
+        /// Gets the total time taken to analyze the snapshot.
+        /// </summary>
         public TimeSpan ElapsedTime
         {
             get
@@ -37,6 +53,10 @@ namespace Tvl.VisualStudio.InheritanceMargin
             }
         }
 
+        /// <summary>
+        /// Gets a collection of inheritance tags describing the inheritance relations of types and members located
+        /// within the snapshot.
+        /// </summary>
         public IEnumerable<ITagSpan<IInheritanceTag>> Tags
         {
             get

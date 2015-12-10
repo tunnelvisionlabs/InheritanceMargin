@@ -5,6 +5,9 @@ namespace Tvl.VisualStudio.InheritanceMargin
 {
     using Microsoft.VisualStudio.Text.Editor;
 
+    /// <summary>
+    /// A tag representing an inheritance relation in code.
+    /// </summary>
     public interface IInheritanceTag : IGlyphTag
     {
     }

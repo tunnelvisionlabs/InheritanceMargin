@@ -8,9 +8,9 @@ namespace Tvl.VisualStudio.InheritanceMargin
 
     internal class InheritanceTagFactory : IInheritanceTagFactory
     {
-        public IInheritanceTag CreateTag(InheritanceGlyph glyph, string displayName, IEnumerable<IInheritanceTarget> targets)
+        public IInheritanceTag CreateTag(InheritanceGlyph glyph, string tooltip, IEnumerable<IInheritanceTarget> targets)
         {
-            return new InheritanceTag(glyph, displayName, targets.ToList());
+            return new InheritanceTag(glyph, tooltip, targets.ToList());
         }
     }
 }
