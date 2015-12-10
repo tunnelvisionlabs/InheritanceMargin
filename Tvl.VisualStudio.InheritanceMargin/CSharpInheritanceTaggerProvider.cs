@@ -48,7 +48,8 @@
             private set;
         }
 
-        public ITagger<T> CreateTagger<T>(ITextBuffer buffer) where T : ITag
+        public ITagger<T> CreateTagger<T>(ITextBuffer buffer)
+            where T : ITag
         {
             if (buffer != null)
                 return CSharpInheritanceTagger.CreateInstance(this, buffer) as ITagger<T>;
