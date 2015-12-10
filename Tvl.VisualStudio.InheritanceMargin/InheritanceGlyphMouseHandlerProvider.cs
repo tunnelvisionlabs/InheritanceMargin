@@ -16,7 +16,7 @@
         {
             get;
             private set;
-        } 
+        }
 
         public IMouseProcessor GetAssociatedMouseProcessor(IWpfTextViewHost wpfTextViewHost, IWpfTextViewMargin margin)
         {
