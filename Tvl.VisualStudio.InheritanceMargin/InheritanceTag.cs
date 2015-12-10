@@ -17,9 +17,9 @@ namespace Tvl.VisualStudio.InheritanceMargin
     {
         private readonly InheritanceGlyph _glyph;
         private readonly string _tooltip;
-        private FrameworkElement _marginGlyph;
-
         private readonly List<IInheritanceTarget> _targets;
+
+        private FrameworkElement _marginGlyph;
 
         public InheritanceTag(InheritanceGlyph glyph, string tooltip, List<IInheritanceTarget> members)
         {
