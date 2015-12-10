@@ -207,13 +207,13 @@
         /// <summary>
         /// If <paramref name="node"/> is a <see cref="FieldDeclarationNode"/>, this method selects
         /// all <see cref="VariableDeclaratorNode"/> children of <paramref name="node"/>. Otherwise,
-        /// this method returns a collection containing <see cref="node"/> itself.
+        /// this method returns a collection containing <paramref name="node"/> itself.
         /// </summary>
         /// <param name="node">The node.</param>
         /// <returns>
         /// If <paramref name="node"/> is a <see cref="FieldDeclarationNode"/>, this method returns
         /// <see cref="FieldDeclarationNode.VariableDeclarators"/>. Otherwise, this method returns
-        /// a collection containing <see cref="node"/> itself.
+        /// a collection containing <paramref name="node"/> itself.
         /// </returns>
         private static IEnumerable<ParseTreeNode> SelectDeclaratorsFromFields(ParseTreeNode node)
         {
