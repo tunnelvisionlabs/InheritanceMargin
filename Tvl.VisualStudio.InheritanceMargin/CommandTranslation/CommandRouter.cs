@@ -140,7 +140,7 @@
                 long bufferAddress = (long)pCmdTextInt + (long)bufferOffset;
                 Marshal.Copy(source, 0, (IntPtr)bufferAddress, length);
                 // null terminator
-                Marshal.WriteInt16(pCmdTextInt, (int)bufferOffset + length * 2, 0);
+                Marshal.WriteInt16(pCmdTextInt, (int)bufferOffset + (length * 2), 0);
                 // length including null terminator
                 Marshal.WriteInt32(pCmdTextInt, (int)lengthOffset, length + 1);
             }
