@@ -3,7 +3,7 @@
 *.suo
 
 # Temporary files created by the IDE
-*.sln.ide/
+.vs/
 
 # NuGet packages
 packages/
