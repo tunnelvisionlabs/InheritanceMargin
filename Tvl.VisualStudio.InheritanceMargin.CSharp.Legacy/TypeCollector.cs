@@ -10,7 +10,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
 
     internal class TypeCollector : ParseTreeVisitor, IEnumerable<ParseTreeNode>
     {
-        private readonly List<ParseTreeNode> nodes = new List<ParseTreeNode>();
+        private readonly List<ParseTreeNode> _nodes = new List<ParseTreeNode>();
 
         public TypeCollector(ParseTreeNode node)
         {
@@ -19,7 +19,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
 
         public IEnumerator<ParseTreeNode> GetEnumerator()
         {
-            return this.nodes.GetEnumerator();
+            return this._nodes.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -86,7 +86,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
 
         public override void VisitTypeDeclarationNode(TypeDeclarationNode node)
         {
-            this.nodes.Add(node);
+            this._nodes.Add(node);
 
             for (MemberDeclarationNode node2 = node.MemberDeclarations; node2 != null; node2 = node2.Next)
             {
