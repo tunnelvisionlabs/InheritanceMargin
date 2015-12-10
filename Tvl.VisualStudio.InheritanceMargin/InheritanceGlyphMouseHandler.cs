@@ -189,7 +189,7 @@
             return false;
         }
 
-        private void HandleDragStart(Point _clickLocation)
+        private void HandleDragStart(Point clickLocation)
         {
         }
 
