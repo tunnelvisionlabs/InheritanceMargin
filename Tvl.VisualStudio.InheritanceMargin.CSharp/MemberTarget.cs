@@ -1,4 +1,7 @@
-﻿namespace Tvl.VisualStudio.InheritanceMargin.CSharp
+﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
+// Licensed under the Microsoft Reciprocal License (MS-RL). See LICENSE in the project root for license information.
+
+namespace Tvl.VisualStudio.InheritanceMargin.CSharp
 {
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.Text;
@@ -18,6 +21,7 @@
             _solution = solution;
         }
 
+        /// <inheritdoc/>
         public string DisplayName
         {
             get
@@ -26,6 +30,7 @@
             }
         }
 
+        /// <inheritdoc/>
         public void NavigateTo()
         {
             CSharpInheritanceAnalyzer.NavigateToSymbol(_textContainer, _memberIdentifier, _project);

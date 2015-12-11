@@ -1,4 +1,7 @@
-﻿namespace Tvl.VisualStudio.InheritanceMargin
+﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
+// Licensed under the Microsoft Reciprocal License (MS-RL). See LICENSE in the project root for license information.
+
+namespace Tvl.VisualStudio.InheritanceMargin
 {
     using System;
     using System.Collections.Generic;
@@ -28,17 +31,18 @@
             if (buffer == null)
                 throw new ArgumentNullException("buffer");
 
-            this._provider = provider;
-            this._buffer = buffer;
+            _provider = provider;
+            _buffer = buffer;
 
             if (_analyzerType == null)
                 _analyzerType = LoadAnalyzerType(provider.GlobalServiceProvider);
 
-            this._analyzer = (IInheritanceParser)Activator.CreateInstance(_analyzerType, buffer, provider.TaskScheduler, provider.TextDocumentFactoryService, provider.OutputWindowService, provider.GlobalServiceProvider, new InheritanceTagFactory());
-            this._analyzer.ParseComplete += HandleParseComplete;
-            this._analyzer.RequestParse(false);
+            _analyzer = (IInheritanceParser)Activator.CreateInstance(_analyzerType, buffer, provider.TaskScheduler, provider.TextDocumentFactoryService, provider.OutputWindowService, provider.GlobalServiceProvider, new InheritanceTagFactory());
+            _analyzer.ParseComplete += HandleParseComplete;
+            _analyzer.RequestParse(false);
         }
 
+        /// <inheritdoc/>
         public event EventHandler<SnapshotSpanEventArgs> TagsChanged;
 
         internal static CSharpInheritanceTagger CreateInstance(CSharpInheritanceTaggerProvider provider, ITextBuffer buffer)
@@ -84,6 +88,7 @@
             return assembly.GetType("Tvl.VisualStudio.InheritanceMargin.CSharp.CSharpInheritanceAnalyzer");
         }
 
+        /// <inheritdoc/>
         public IEnumerable<ITagSpan<IInheritanceTag>> GetTags(NormalizedSnapshotSpanCollection spans)
         {
             return _tags;

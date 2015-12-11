@@ -1,4 +1,7 @@
-﻿namespace Tvl.VisualStudio.InheritanceMargin
+﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
+// Licensed under the Microsoft Reciprocal License (MS-RL). See LICENSE in the project root for license information.
+
+namespace Tvl.VisualStudio.InheritanceMargin
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -14,15 +17,15 @@
     {
         private readonly InheritanceGlyph _glyph;
         private readonly string _tooltip;
-        private FrameworkElement _marginGlyph;
-
         private readonly List<IInheritanceTarget> _targets;
+
+        private FrameworkElement _marginGlyph;
 
         public InheritanceTag(InheritanceGlyph glyph, string tooltip, List<IInheritanceTarget> members)
         {
-            this._glyph = glyph;
-            this._tooltip = tooltip;
-            this._targets = members;
+            _glyph = glyph;
+            _tooltip = tooltip;
+            _targets = members;
         }
 
         public InheritanceGlyph Glyph
@@ -64,7 +67,7 @@
 
         public void ShowContextMenu(MouseEventArgs e)
         {
-            CommandRouter.DisplayContextMenu(InheritanceMarginConstants.guidInheritanceMarginCommandSet, InheritanceMarginConstants.menuInheritanceTargets, _marginGlyph);
+            CommandRouter.DisplayContextMenu(InheritanceMarginConstants.GuidInheritanceMarginCommandSet, InheritanceMarginConstants.MenuInheritanceTargets, _marginGlyph);
         }
 
         public void HandleExecutedInheritanceTargetsList(object sender, ExecutedRoutedEventArgs e)
@@ -72,7 +75,7 @@
             CommandTargetParameters parameter = e.Parameter as CommandTargetParameters;
             if (parameter != null)
             {
-                int index = parameter.Id - InheritanceMarginConstants.cmdidInheritanceTargetsList;
+                int index = parameter.Id - InheritanceMarginConstants.CmdidInheritanceTargetsList;
                 Targets[index].NavigateTo();
             }
         }
@@ -82,7 +85,7 @@
             CommandTargetParameters parameter = e.Parameter as CommandTargetParameters;
             if (parameter != null)
             {
-                int index = parameter.Id - InheritanceMarginConstants.cmdidInheritanceTargetsList;
+                int index = parameter.Id - InheritanceMarginConstants.CmdidInheritanceTargetsList;
                 if (index < Targets.Count)
                 {
                     e.CanExecute = true;

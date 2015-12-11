@@ -1,4 +1,7 @@
-﻿namespace Tvl.VisualStudio.InheritanceMargin.CommandTranslation
+﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
+// Licensed under the Microsoft Reciprocal License (MS-RL). See LICENSE in the project root for license information.
+
+namespace Tvl.VisualStudio.InheritanceMargin.CommandTranslation
 {
     using System;
 
@@ -49,7 +52,11 @@
             return RouteExec(
                 (args, command) => command.CanExecute(args, routing),
                 (args, command) => command.Execute(args, routing),
-                ref pguidCmdGroup, nCmdID, nCmdexecopt, pvaIn, pvaOut);
+                ref pguidCmdGroup,
+                nCmdID,
+                nCmdexecopt,
+                pvaIn,
+                pvaOut);
         }
 
         private static int RouteExec(Func<CommandTargetParameters, RoutedCommand, bool> canExecuteFunc, Action<CommandTargetParameters, RoutedCommand> executeFunc, ref Guid pguidCmdGroup, uint nCmdID, uint nCmdexecopt, IntPtr pvaIn, IntPtr pvaOut)
@@ -135,8 +142,10 @@
                 // copy the new text
                 long bufferAddress = (long)pCmdTextInt + (long)bufferOffset;
                 Marshal.Copy(source, 0, (IntPtr)bufferAddress, length);
+
                 // null terminator
-                Marshal.WriteInt16(pCmdTextInt, (int)bufferOffset + length * 2, 0);
+                Marshal.WriteInt16(pCmdTextInt, (int)bufferOffset + (length * 2), 0);
+
                 // length including null terminator
                 Marshal.WriteInt32(pCmdTextInt, (int)lengthOffset, length + 1);
             }
@@ -148,7 +157,7 @@
 
             public ContextMenuRouter(IInputElement route)
             {
-                this._route = route;
+                _route = route;
             }
 
             public IInputElement Route
@@ -159,8 +168,6 @@
                 }
             }
 
-            #region IOleCommandTarget Members
-
             public int Exec(ref Guid pguidCmdGroup, uint nCmdID, uint nCmdexecopt, IntPtr pvaIn, IntPtr pvaOut)
             {
                 return RouteExec(Route, ref pguidCmdGroup, nCmdID, nCmdexecopt, pvaIn, pvaOut);
@@ -170,8 +177,6 @@
             {
                 return RouteQueryStatus(Route, ref pguidCmdGroup, cCmds, prgCmds, pCmdText);
             }
-
-            #endregion
         }
     }
 }

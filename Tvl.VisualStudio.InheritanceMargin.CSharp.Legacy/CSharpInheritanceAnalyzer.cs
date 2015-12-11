@@ -1,4 +1,7 @@
-﻿namespace Tvl.VisualStudio.InheritanceMargin.CSharp
+﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
+// Licensed under the Microsoft Reciprocal License (MS-RL). See LICENSE in the project root for license information.
+
+namespace Tvl.VisualStudio.InheritanceMargin.CSharp
 {
     using System;
     using System.Collections.Generic;
@@ -37,6 +40,7 @@
             _tagFactory = tagFactory;
         }
 
+        /// <inheritdoc/>
         public override string Name
         {
             get
@@ -119,18 +123,18 @@
             }
             catch (ApplicationException)
             {
-                //_callHierarchy.LanguageService.DisplayErrorMessage(exception.Message);
+                ////_callHierarchy.LanguageService.DisplayErrorMessage(exception.Message);
                 return;
             }
             catch (InvalidOperationException)
             {
-                //this._callHierarchy.LanguageService.DisplayErrorMessage(exception2.Message);
+                ////this._callHierarchy.LanguageService.DisplayErrorMessage(exception2.Message);
                 return;
             }
 
             if (!result)
             {
-                //NativeMessageId.Create(this._callHierarchy.LanguageService, jrc_StringResource_identifiers.IDS_HIDDEN_DEFINITION, new object[0]).DisplayError(this._callHierarchy.LanguageService);
+                ////NativeMessageId.Create(this._callHierarchy.LanguageService, jrc_StringResource_identifiers.IDS_HIDDEN_DEFINITION, new object[0]).DisplayError(this._callHierarchy.LanguageService);
             }
         }
 
@@ -167,18 +171,18 @@
             }
             catch (ApplicationException)
             {
-                //_callHierarchy.LanguageService.DisplayErrorMessage(exception.Message);
+                ////_callHierarchy.LanguageService.DisplayErrorMessage(exception.Message);
                 return;
             }
             catch (InvalidOperationException)
             {
-                //this._callHierarchy.LanguageService.DisplayErrorMessage(exception2.Message);
+                ////this._callHierarchy.LanguageService.DisplayErrorMessage(exception2.Message);
                 return;
             }
 
             if (!result)
             {
-                //NativeMessageId.Create(this._callHierarchy.LanguageService, jrc_StringResource_identifiers.IDS_HIDDEN_DEFINITION, new object[0]).DisplayError(this._callHierarchy.LanguageService);
+                ////NativeMessageId.Create(this._callHierarchy.LanguageService, jrc_StringResource_identifiers.IDS_HIDDEN_DEFINITION, new object[0]).DisplayError(this._callHierarchy.LanguageService);
             }
         }
 
@@ -207,13 +211,13 @@
         /// <summary>
         /// If <paramref name="node"/> is a <see cref="FieldDeclarationNode"/>, this method selects
         /// all <see cref="VariableDeclaratorNode"/> children of <paramref name="node"/>. Otherwise,
-        /// this method returns a collection containing <see cref="node"/> itself.
+        /// this method returns a collection containing <paramref name="node"/> itself.
         /// </summary>
         /// <param name="node">The node.</param>
         /// <returns>
         /// If <paramref name="node"/> is a <see cref="FieldDeclarationNode"/>, this method returns
         /// <see cref="FieldDeclarationNode.VariableDeclarators"/>. Otherwise, this method returns
-        /// a collection containing <see cref="node"/> itself.
+        /// a collection containing <paramref name="node"/> itself.
         /// </returns>
         private static IEnumerable<ParseTreeNode> SelectDeclaratorsFromFields(ParseTreeNode node)
         {
@@ -224,6 +228,7 @@
             return fieldDeclarationNode.VariableDeclarators;
         }
 
+        /// <inheritdoc/>
         protected override void ReParseImpl()
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
@@ -334,10 +339,13 @@
 
                         // methods which this method implements
                         ISet<CSharpMemberIdentifier> implementedMethods = collector.GetImplementedInterfaceMembers(member.SymbolicIdentifier);
+
                         // methods which this method overrides
                         ISet<CSharpMemberIdentifier> overriddenMethods = collector.GetOverriddenBaseMembers(member.SymbolicIdentifier);
+
                         // methods which override this method
                         ISet<CSharpMemberIdentifier> overridingMethods = collector.GetOverridersFromDerivedTypes(member.SymbolicIdentifier);
+
                         // methods which implement this method
                         ISet<CSharpMemberIdentifier> implementingMethods = collector.GetImplementorsForInterfaceMember(member.SymbolicIdentifier);
 
@@ -425,7 +433,7 @@
             }
             catch (InvalidOperationException)
             {
-                base.MarkDirty(true);
+                MarkDirty(true);
                 throw;
             }
         }

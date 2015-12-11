@@ -1,4 +1,7 @@
-﻿namespace Tvl.VisualStudio.InheritanceMargin
+﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
+// Licensed under the Microsoft Reciprocal License (MS-RL). See LICENSE in the project root for license information.
+
+namespace Tvl.VisualStudio.InheritanceMargin
 {
     using System;
     using System.Collections.Generic;
@@ -12,7 +15,7 @@
     using OleConstants = Microsoft.VisualStudio.OLE.Interop.Constants;
     using UICONTEXT = Microsoft.VisualStudio.VSConstants.UICONTEXT;
 
-    [Guid(InheritanceMarginConstants.guidInheritanceMarginPackageString)]
+    [Guid(InheritanceMarginConstants.GuidInheritanceMarginPackageString)]
     [PackageRegistration(UseManagedResourcesOnly = true)]
     [ProvideMenuResource(1000, 1)]
     internal class InheritanceMarginPackage : Package, IOleCommandTarget
@@ -63,6 +66,7 @@
             return null;
         }
 
+        /// <inheritdoc/>
         protected override void Initialize()
         {
             base.Initialize();
@@ -71,7 +75,7 @@
 
         private void DefineRoutableCommands()
         {
-            DefineRoutableCommand("InheritanceTargetsList", InheritanceMarginConstants.guidInheritanceMarginCommandSet, InheritanceMarginConstants.cmdidInheritanceTargetsList, InheritanceMarginConstants.cmdidInheritanceTargetsListEnd);
+            DefineRoutableCommand("InheritanceTargetsList", InheritanceMarginConstants.GuidInheritanceMarginCommandSet, InheritanceMarginConstants.CmdidInheritanceTargetsList, InheritanceMarginConstants.CmdidInheritanceTargetsListEnd);
         }
 
         private void DefineRoutableCommand(string propertyName, Guid guid, int startId, int endId)
@@ -97,18 +101,20 @@
             _definedCommandTable.Add(new CommandId(guid, startId, endId), command);
         }
 
+        /// <inheritdoc/>
         int IOleCommandTarget.Exec(ref Guid pguidCmdGroup, uint nCmdID, uint nCmdexecopt, IntPtr pvaIn, IntPtr pvaOut)
         {
-            IOleCommandTarget service = (IOleCommandTarget)base.GetService(typeof(IOleCommandTarget));
+            IOleCommandTarget service = (IOleCommandTarget)GetService(typeof(IOleCommandTarget));
             if (service != null)
                 return service.Exec(ref pguidCmdGroup, nCmdID, nCmdexecopt, pvaIn, pvaOut);
 
             return (int)OleConstants.MSOCMDERR_E_NOTSUPPORTED;
         }
 
+        /// <inheritdoc/>
         int IOleCommandTarget.QueryStatus(ref Guid pguidCmdGroup, uint cCmds, OLECMD[] prgCmds, IntPtr pCmdText)
         {
-            IOleCommandTarget service = (IOleCommandTarget)base.GetService(typeof(IOleCommandTarget));
+            IOleCommandTarget service = (IOleCommandTarget)GetService(typeof(IOleCommandTarget));
             if (service != null)
                 return service.QueryStatus(ref pguidCmdGroup, cCmds, prgCmds, pCmdText);
 

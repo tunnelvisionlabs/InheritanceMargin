@@ -1,4 +1,7 @@
-﻿namespace Tvl.VisualStudio.InheritanceMargin
+﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
+// Licensed under the Microsoft Reciprocal License (MS-RL). See LICENSE in the project root for license information.
+
+namespace Tvl.VisualStudio.InheritanceMargin
 {
     using System.ComponentModel.Composition;
     using Microsoft.VisualStudio.Shell;
@@ -20,7 +23,7 @@
             TaskScheduler = TaskScheduler.Default;
         }
 
-        //[Import(PredefinedTaskSchedulers.BackgroundIntelliSense)]
+        ////[Import(PredefinedTaskSchedulers.BackgroundIntelliSense)]
         public TaskScheduler TaskScheduler
         {
             get;
@@ -48,16 +51,14 @@
             private set;
         }
 
-        #region ITaggerProvider Members
-
-        public ITagger<T> CreateTagger<T>(ITextBuffer buffer) where T : ITag
+        /// <inheritdoc/>
+        public ITagger<T> CreateTagger<T>(ITextBuffer buffer)
+            where T : ITag
         {
             if (buffer != null)
                 return CSharpInheritanceTagger.CreateInstance(this, buffer) as ITagger<T>;
 
             return null;
         }
-
-        #endregion
     }
 }

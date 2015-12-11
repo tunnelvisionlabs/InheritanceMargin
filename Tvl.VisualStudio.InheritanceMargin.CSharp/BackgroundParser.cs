@@ -1,4 +1,7 @@
-﻿namespace Tvl.VisualStudio.InheritanceMargin.CSharp
+﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
+// Licensed under the Microsoft Reciprocal License (MS-RL). See LICENSE in the project root for license information.
+
+namespace Tvl.VisualStudio.InheritanceMargin.CSharp
 {
     using System;
     using System.Diagnostics;
@@ -24,8 +27,6 @@
         private bool _dirty;
         private int _parsing;
 
-        public event EventHandler<InheritanceParseResultEventArgs> ParseComplete;
-
         [Obsolete]
         public BackgroundParser(ITextBuffer textBuffer, ITextDocumentFactoryService textDocumentFactoryService, IOutputWindowService outputWindowService)
             : this(textBuffer, TaskScheduler.Default, textDocumentFactoryService, outputWindowService, PredefinedOutputWindowPanes.TvlDiagnostics)
@@ -48,19 +49,22 @@
             if (outputWindowService == null)
                 throw new ArgumentNullException("outputWindowService");
 
-            this._textBuffer = new WeakReference(textBuffer);
-            this._taskScheduler = taskScheduler;
-            this._textDocumentFactoryService = textDocumentFactoryService;
-            this._outputWindowService = outputWindowService;
-            this._outputWindowName = outputPaneName;
+            _textBuffer = new WeakReference(textBuffer);
+            _taskScheduler = taskScheduler;
+            _textDocumentFactoryService = textDocumentFactoryService;
+            _outputWindowService = outputWindowService;
+            _outputWindowName = outputPaneName;
 
             textBuffer.PostChanged += TextBufferPostChanged;
 
-            this._dirty = true;
-            this._reparseDelay = TimeSpan.FromMilliseconds(1500);
-            this._timer = new Timer(ParseTimerCallback, null, _reparseDelay, _reparseDelay);
-            this._lastEdit = DateTimeOffset.MinValue;
+            _dirty = true;
+            _reparseDelay = TimeSpan.FromMilliseconds(1500);
+            _timer = new Timer(ParseTimerCallback, null, _reparseDelay, _reparseDelay);
+            _lastEdit = DateTimeOffset.MinValue;
         }
+
+        /// <inheritdoc/>
+        public event EventHandler<InheritanceParseResultEventArgs> ParseComplete;
 
         public ITextBuffer TextBuffer
         {
@@ -114,12 +118,6 @@
             }
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
         public virtual string Name
         {
             get
@@ -144,6 +142,14 @@
             }
         }
 
+        /// <inheritdoc/>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <inheritdoc/>
         public void RequestParse(bool forceReparse)
         {
             TryReparse(forceReparse);
@@ -177,8 +183,8 @@
 
         protected void MarkDirty(bool resetTimer)
         {
-            this._dirty = true;
-            this._lastEdit = DateTimeOffset.Now;
+            _dirty = true;
+            _lastEdit = DateTimeOffset.Now;
 
             if (resetTimer)
                 _timer.Change(_reparseDelay, _reparseDelay);
@@ -278,7 +284,6 @@
                             throw;
                     }
                 }
-
             }
             catch (Exception ex)
             {

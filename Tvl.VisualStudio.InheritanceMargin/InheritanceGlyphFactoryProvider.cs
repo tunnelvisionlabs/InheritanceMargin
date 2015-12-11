@@ -1,4 +1,7 @@
-﻿namespace Tvl.VisualStudio.InheritanceMargin
+﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
+// Licensed under the Microsoft Reciprocal License (MS-RL). See LICENSE in the project root for license information.
+
+namespace Tvl.VisualStudio.InheritanceMargin
 {
     using System;
     using System.ComponentModel.Composition;
@@ -27,8 +30,7 @@
             set;
         }
 
-        #region IGlyphFactoryProvider Members
-
+        /// <inheritdoc/>
         public IGlyphFactory GetGlyphFactory(IWpfTextView view, IWpfTextViewMargin margin)
         {
             if (view == null || margin == null)
@@ -45,7 +47,5 @@
 
             return new InheritanceGlyphFactory(this, view, margin);
         }
-
-        #endregion
     }
 }

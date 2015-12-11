@@ -1,4 +1,7 @@
-﻿namespace Tvl.VisualStudio.InheritanceMargin.CommandTranslation
+﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
+// Licensed under the Microsoft Reciprocal License (MS-RL). See LICENSE in the project root for license information.
+
+namespace Tvl.VisualStudio.InheritanceMargin.CommandTranslation
 {
     using System.Collections.Generic;
 
@@ -15,9 +18,9 @@
 
         public CommandId(Guid menuGroup, int startID, int endID)
         {
-            this.Guid = menuGroup;
-            this.Id = startID;
-            this.EndId = endID;
+            Guid = menuGroup;
+            Id = startID;
+            EndId = endID;
         }
 
         public int EndId

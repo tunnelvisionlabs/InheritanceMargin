@@ -1,4 +1,7 @@
-﻿namespace Tvl.VisualStudio.InheritanceMargin
+﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
+// Licensed under the Microsoft Reciprocal License (MS-RL). See LICENSE in the project root for license information.
+
+namespace Tvl.VisualStudio.InheritanceMargin
 {
     using System;
     using System.Collections.Generic;
@@ -51,16 +54,19 @@
             _textViewHost.Closed += (sender, e) => _glyphTagAggregator.Dispose();
         }
 
+        /// <inheritdoc/>
         public override void PostprocessMouseEnter(MouseEventArgs e)
         {
             EnableToolTips();
         }
 
+        /// <inheritdoc/>
         public override void PostprocessMouseLeave(MouseEventArgs e)
         {
             DisableToolTips();
         }
 
+        /// <inheritdoc/>
         public override void PostprocessMouseRightButtonUp(MouseButtonEventArgs e)
         {
             Point mouseLocationInTextView = GetMouseLocationInTextView(e);
@@ -81,6 +87,7 @@
             }
         }
 
+        /// <inheritdoc/>
         public override void PostprocessMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             _clickLocation = GetMouseLocationInTextView(e);
@@ -89,6 +96,7 @@
                 HandleDragStart(_clickLocation);
         }
 
+        /// <inheritdoc/>
         public override void PostprocessMouseLeftButtonUp(MouseButtonEventArgs e)
         {
             Point mouseLocationInTextView = GetMouseLocationInTextView(e);
@@ -105,6 +113,7 @@
             }
         }
 
+        /// <inheritdoc/>
         public override void PreprocessMouseMove(MouseEventArgs e)
         {
             Point mouseLocationInTextView = GetMouseLocationInTextView(e);
@@ -152,7 +161,7 @@
 
         private ITextViewLine GetTextViewLine(double y)
         {
-            IWpfTextView textView = this._textViewHost.TextView;
+            IWpfTextView textView = _textViewHost.TextView;
             ITextViewLine textViewLineContainingYCoordinate = textView.TextViewLines.GetTextViewLineContainingYCoordinate(y);
             if (textViewLineContainingYCoordinate == null)
                 textViewLineContainingYCoordinate = (y <= textView.TextViewLines[0].Top) ? textView.TextViewLines.FirstVisibleLine : textView.TextViewLines.LastVisibleLine;
@@ -189,7 +198,7 @@
             return false;
         }
 
-        private void HandleDragStart(Point _clickLocation)
+        private void HandleDragStart(Point clickLocation)
         {
         }
 
@@ -214,9 +223,9 @@
             if (_mouseHoverTimer != null && _mouseHoverTimer.IsEnabled && _margin.Enabled)
             {
                 ITextViewLine textViewLineContainingYCoordinate = _textViewHost.TextView.TextViewLines.GetTextViewLineContainingYCoordinate(point.Y + _textViewHost.TextView.ViewportTop);
-                if (textViewLineContainingYCoordinate != this._lastHoverPosition)
+                if (textViewLineContainingYCoordinate != _lastHoverPosition)
                 {
-                    this._lastHoverPosition = textViewLineContainingYCoordinate;
+                    _lastHoverPosition = textViewLineContainingYCoordinate;
                     if (textViewLineContainingYCoordinate != null)
                     {
                         string str = null;
@@ -228,7 +237,7 @@
 
                         if (!string.IsNullOrEmpty(str))
                         {
-                            this._popup.Child = null;
+                            _popup.Child = null;
                             TextBlock block = new TextBlock
                             {
                                 Text = str,
