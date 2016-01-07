@@ -1,5 +1,7 @@
 # Inheritance Margin extension for Visual Studio 2010+
 
+[![Build status](https://ci.appveyor.com/api/projects/status/0n5me6pqj21fh0fo/branch/master?svg=true)](https://ci.appveyor.com/project/sharwell/inheritancemargin/branch/master)
+
 This extension adds inheritance glyphs to the glyph margin in the Visual Studio text editor. Glyphs are displayed for the following items:
 
 * Interface methods/properties/events which are implemented by the current item
