@@ -22,6 +22,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
     using Tvl.VisualStudio.OutputWindow.Interfaces;
     using Stopwatch = System.Diagnostics.Stopwatch;
     using StringBuilder = System.Text.StringBuilder;
+    using Task = System.Threading.Tasks.Task;
 
     internal class CSharpInheritanceAnalyzer : BackgroundParser
     {
@@ -30,8 +31,34 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
         private static readonly Lazy<Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>> FindDerivedClassesAsync
             = new Lazy<Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>>(() => (Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>)Delegate.CreateDelegate(typeof(Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>), DependentTypeFinder.Value.GetMethod("FindDerivedClassesAsync", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)));
 
-        private static readonly Lazy<Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>> FindDerivedInterfacesAsync
-            = new Lazy<Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>>(() => (Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>)Delegate.CreateDelegate(typeof(Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>), DependentTypeFinder.Value.GetMethod("FindDerivedInterfacesAsync", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)));
+        private static readonly Lazy<MethodInfo> FindDerivedInterfacesAsyncMethodInfo =
+            new Lazy<MethodInfo>(() => DependentTypeFinder.Value.GetMethod("FindDerivedInterfacesAsync", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic));
+
+        private static readonly Lazy<MethodInfo> GetTypesImmediatelyDerivedFromInterfacesAsyncMethodInfo =
+            new Lazy<MethodInfo>(() => DependentTypeFinder.Value.GetMethod("GetTypesImmediatelyDerivedFromInterfacesAsync", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic));
+
+        /// <summary>
+        /// Prior to Roslyn 1.2, <c>DependentTypeFinder.FindDerivedInterfacesAsync</c> can be used directly. Afterwards,
+        /// <c>DependentTypeFinder.GetTypesImmediatelyDerivedFromInterfacesAsync</c> must be used instead.
+        /// </summary>
+        private static readonly Lazy<Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>> FindDerivedInterfacesAsync =
+            new Lazy<Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>>(() =>
+            {
+                MethodInfo method = FindDerivedInterfacesAsyncMethodInfo.Value;
+                if (method == null)
+                {
+                    method = GetTypesImmediatelyDerivedFromInterfacesAsyncMethodInfo.Value;
+                    if (method == null)
+                    {
+                        return (symbol, solution, projects, cancellationToken) => Task.FromResult(Enumerable.Empty<INamedTypeSymbol>());
+                    }
+
+                    var immediatelyDerived = (Func<INamedTypeSymbol, Solution, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>)Delegate.CreateDelegate(typeof(Func<INamedTypeSymbol, Solution, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>), method);
+                    return (symbol, solution, projects, cancellationToken) => GetDerivedInterfacesFromImmediatelyDerivedAsync(symbol, solution, projects, immediatelyDerived, cancellationToken);
+                }
+
+                return (Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>)Delegate.CreateDelegate(typeof(Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>), method);
+            });
 
         private static readonly Lazy<Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>> FindImplementingTypesAsync
             = new Lazy<Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>>(() => (Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>)Delegate.CreateDelegate(typeof(Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>), DependentTypeFinder.Value.GetMethod("FindImplementingTypesAsync", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)));
@@ -69,6 +96,45 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
                 return;
 
             visualStudioWorkspace.TryGoToDefinition(symbol, project, CancellationToken.None);
+        }
+
+        private static async Task<IEnumerable<INamedTypeSymbol>> GetDerivedInterfacesFromImmediatelyDerivedAsync(
+            INamedTypeSymbol type,
+            Solution solution,
+            IImmutableSet<Project> projects,
+            Func<INamedTypeSymbol, Solution, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>> immediatelyDerivedAsync,
+            CancellationToken cancellationToken)
+        {
+            if (type.TypeKind != TypeKind.Interface)
+            {
+                return Enumerable.Empty<INamedTypeSymbol>();
+            }
+
+            type = type.OriginalDefinition;
+
+            var result = ImmutableArray.CreateBuilder<INamedTypeSymbol>();
+            HashSet<INamedTypeSymbol> visited = new HashSet<INamedTypeSymbol>();
+            visited.Add(type);
+            Queue<INamedTypeSymbol> workList = new Queue<INamedTypeSymbol>();
+            workList.Enqueue(type);
+            while (workList.Count > 0)
+            {
+                INamedTypeSymbol current = workList.Dequeue();
+                foreach (INamedTypeSymbol derived in await immediatelyDerivedAsync(current, solution, cancellationToken).ConfigureAwait(false))
+                {
+                    if (derived.TypeKind != TypeKind.Interface)
+                        continue;
+
+                    INamedTypeSymbol original = derived.OriginalDefinition;
+                    if (!visited.Add(original))
+                        continue;
+
+                    result.Add(original);
+                    workList.Enqueue(original);
+                }
+            }
+
+            return result.ToImmutable();
         }
 
         /// <inheritdoc/>
