@@ -82,8 +82,22 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
                         continue;
 
                     var baseTypes = collector.GetBaseTypes(type);
-                    if (baseTypes.Contains(baseType))
-                        result.Add(type);
+                    if (baseType.TypeParameters != null && baseType.TypeParameters.Count > 0)
+                    {
+                        foreach (var candidate in baseTypes)
+                        {
+                            if (Equals(baseType, candidate.DefiningType))
+                            {
+                                result.Add(type);
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (baseTypes.Contains(baseType))
+                            result.Add(type);
+                    }
                 }
             }
 
