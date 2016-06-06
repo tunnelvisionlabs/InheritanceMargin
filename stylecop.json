@@ -12,7 +12,7 @@
     },
     "documentationRules": {
       "companyName": "Tunnel Vision Laboratories, LLC",
-      "copyrightText": "Copyright (c) {companyName}. All Rights Reserved.\nLicensed under the Microsoft Reciprocal License (MS-RL). See LICENSE in the project root for license information.",
+      "copyrightText": "Copyright (c) {companyName}. All Rights Reserved.\nLicensed under the MIT License. See LICENSE.txt in the project root for license information.",
       "xmlHeader": false,
       "fileNamingConvention": "metadata",
       "documentInternalElements": false
