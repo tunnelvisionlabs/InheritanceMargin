@@ -440,7 +440,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
                         members.AddRange(implementingMethods);
                         members.AddRange(overridingMethods);
 
-                        var targets = members.Select(i => new MemberTarget(textContainer, i, project, solution));
+                        var targets = members.Select(i => new MemberTarget(textContainer, i, solution));
                         tags.Add(new TagSpan<IInheritanceTag>(span, _tagFactory.CreateTag(tag, builder.ToString().TrimEnd(), targets)));
                     }
                 }
