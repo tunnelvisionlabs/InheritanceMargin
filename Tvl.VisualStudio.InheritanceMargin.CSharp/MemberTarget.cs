@@ -10,14 +10,12 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
     {
         private readonly SourceTextContainer _textContainer;
         private readonly ISymbol _memberIdentifier;
-        private readonly Project _project;
         private readonly Solution _solution;
 
-        public MemberTarget(SourceTextContainer textContainer, ISymbol memberIdentifier, Project project, Solution solution)
+        public MemberTarget(SourceTextContainer textContainer, ISymbol memberIdentifier, Solution solution)
         {
             _textContainer = textContainer;
             _memberIdentifier = memberIdentifier;
-            _project = project;
             _solution = solution;
         }
 
@@ -33,7 +31,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
         /// <inheritdoc/>
         public void NavigateTo()
         {
-            CSharpInheritanceAnalyzer.NavigateToSymbol(_textContainer, _memberIdentifier, _project);
+            CSharpInheritanceAnalyzer.NavigateToSymbol(_textContainer, _memberIdentifier, _solution.GetProject(_memberIdentifier.ContainingAssembly));
         }
     }
 }
