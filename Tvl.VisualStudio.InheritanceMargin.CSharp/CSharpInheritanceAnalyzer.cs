@@ -16,12 +16,12 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
     using Microsoft.CodeAnalysis.FindSymbols;
     using Microsoft.CodeAnalysis.Text;
     using Microsoft.VisualStudio.LanguageServices;
-    using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.Text;
     using Microsoft.VisualStudio.Text.Tagging;
     using Tvl.VisualStudio.OutputWindow.Interfaces;
     using Stopwatch = System.Diagnostics.Stopwatch;
     using StringBuilder = System.Text.StringBuilder;
+    using SVsServiceProvider = Microsoft.VisualStudio.Shell.SVsServiceProvider;
 
     internal class CSharpInheritanceAnalyzer : BackgroundParser
     {
@@ -30,6 +30,9 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
         private static readonly Lazy<Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>> FindDerivedClassesAsync =
             new Lazy<Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>>(() =>
             {
+#if ROSLYN2
+                return SymbolFinder.FindDerivedClassesAsync;
+#else
                 // Assume we are using Roslyn 1.3...
                 var methodInfo = DependentTypeFinder.Value.GetMethod(
                     "FindTransitivelyDerivedClassesAsync",
@@ -50,6 +53,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
                 }
 
                 return (Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>)Delegate.CreateDelegate(typeof(Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>), methodInfo);
+#endif
             });
 
         // Roslyn 1.0-1.1
@@ -87,6 +91,9 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
         private static readonly Lazy<Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>> FindDerivedInterfacesAsync =
             new Lazy<Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>>(() =>
             {
+#if ROSLYN2
+                return (symbol, solution, projects, cancellationToken) => Task.FromResult(Enumerable.Empty<INamedTypeSymbol>());
+#else
                 MethodInfo method = FindDerivedInterfacesAsyncMethodInfo.Value;
                 if (method == null)
                 {
@@ -101,11 +108,19 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
                 }
 
                 return (Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>)Delegate.CreateDelegate(typeof(Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>), method);
+#endif
             });
 
         private static readonly Lazy<Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>> FindImplementingTypesAsync =
             new Lazy<Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>>(() =>
             {
+#if ROSLYN2
+                return async (symbol, solution, projects, cancellationToken) =>
+                {
+                    var symbols = await SymbolFinder.FindImplementationsAsync(symbol, solution, projects, cancellationToken).ConfigureAwait(false);
+                    return symbols.OfType<INamedTypeSymbol>();
+                };
+#else
                 // Assume we are using Roslyn 1.3...
                 var methodInfo = DependentTypeFinder.Value.GetMethod(
                     "FindTransitivelyImplementingTypesAsync",
@@ -126,6 +141,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
                 }
 
                 return (Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>)Delegate.CreateDelegate(typeof(Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>), methodInfo);
+#endif
             });
 
         private readonly SVsServiceProvider _serviceProvider;
