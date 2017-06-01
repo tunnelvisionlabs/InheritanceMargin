@@ -23,6 +23,11 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
     using StringBuilder = System.Text.StringBuilder;
     using SVsServiceProvider = Microsoft.VisualStudio.Shell.SVsServiceProvider;
 
+#if ROSLYN2
+    using System.Linq.Expressions;
+    using IEnumerable = System.Collections.IEnumerable;
+#endif
+
     internal class CSharpInheritanceAnalyzer : BackgroundParser
     {
         private static readonly Lazy<Type> DependentTypeFinder = new Lazy<Type>(() => typeof(SymbolFinder).Assembly.GetType("Microsoft.CodeAnalysis.FindSymbols.DependentTypeFinder"));
@@ -92,7 +97,95 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             new Lazy<Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>>(() =>
             {
 #if ROSLYN2
-                return (symbol, solution, projects, cancellationToken) => Task.FromResult(Enumerable.Empty<INamedTypeSymbol>());
+                Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>> fallbackAccessor =
+                    (symbol, solution, projects, cancellationToken) => Task.FromResult(Enumerable.Empty<INamedTypeSymbol>());
+
+                Type symbolAndProjectIdT = DependentTypeFinder.Value.Assembly.GetType("Microsoft.CodeAnalysis.FindSymbols.SymbolAndProjectId`1", false, false);
+                if (symbolAndProjectIdT == null)
+                    return fallbackAccessor;
+
+                Type namedTypeSymbolAndProjectId = symbolAndProjectIdT.MakeGenericType(typeof(INamedTypeSymbol));
+
+                Type[] findDerivedAndImplementTypesAsyncParameterTypes =
+                {
+                    namedTypeSymbolAndProjectId,
+                    typeof(Solution),
+                    typeof(IImmutableSet<Project>),
+                    typeof(bool),
+                    typeof(CancellationToken)
+                };
+
+                MethodInfo declaredMethodInfo = DependentTypeFinder.Value.GetMethod(
+                    "FindDerivedAndImplementingTypesAsync",
+                    BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic,
+                    null,
+                    findDerivedAndImplementTypesAsyncParameterTypes,
+                    null);
+                if (declaredMethodInfo == null)
+                    return fallbackAccessor;
+
+                ConstructorInfo createSymbolAndProjectIdConstructorInfo = namedTypeSymbolAndProjectId.GetConstructor(
+                    BindingFlags.Instance | BindingFlags.Public,
+                    null,
+                    new[] { typeof(INamedTypeSymbol), typeof(ProjectId) },
+                    null);
+
+                // Here we build up the actual call to FindDerivedAndImplementingTypesAsync
+                ParameterExpression typeParameter = Expression.Parameter(typeof(INamedTypeSymbol), "type");
+                ParameterExpression solutionParameter = Expression.Parameter(typeof(Solution), "solution");
+                ParameterExpression projectsParameter = Expression.Parameter(typeof(IImmutableSet<Project>), "projects");
+                ParameterExpression transitiveParameter = Expression.Parameter(typeof(bool), "transitive");
+                ParameterExpression cancellationTokenParameter = Expression.Parameter(typeof(CancellationToken), "cancellationToken");
+                Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, bool, CancellationToken, Task> callAsync =
+                    Expression.Lambda<Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, bool, CancellationToken, Task>>(
+                        Expression.Call(
+                            declaredMethodInfo,
+                            Expression.New(createSymbolAndProjectIdConstructorInfo, typeParameter, Expression.Convert(Expression.Constant(null), typeof(ProjectId))),
+                            solutionParameter,
+                            projectsParameter,
+                            transitiveParameter,
+                            cancellationTokenParameter),
+                        typeParameter,
+                        solutionParameter,
+                        projectsParameter,
+                        transitiveParameter,
+                        cancellationTokenParameter)
+                    .Compile();
+
+                // The return type is Task<ImmutableArray<SymbolAndProjectId<INamedTypeSymbol>>>. Here we build up a
+                // method to get the task result, and a method which can extract the type symbol from a
+                // SymbolAndProjectId<INamedTypeSymbol>.
+                Type specificTaskType = typeof(Task<>).MakeGenericType(typeof(ImmutableArray<>).MakeGenericType(namedTypeSymbolAndProjectId));
+                PropertyInfo resultProperty = specificTaskType.GetProperty(nameof(Task<int>.Result), BindingFlags.Public | BindingFlags.Instance);
+                ParameterExpression taskParameter = Expression.Parameter(typeof(Task), "task");
+                Func<Task, IEnumerable> readResult =
+                    Expression.Lambda<Func<Task, IEnumerable>>(
+                        Expression.Convert(
+                            Expression.Property(Expression.Convert(taskParameter, specificTaskType), resultProperty.GetMethod),
+                            typeof(IEnumerable)),
+                        taskParameter)
+                    .Compile();
+
+                FieldInfo symbolField = namedTypeSymbolAndProjectId.GetField("Symbol", BindingFlags.Public | BindingFlags.Instance);
+                ParameterExpression symbolAndProjectIdParameter = Expression.Parameter(typeof(object), "symbolAndProjectId");
+                Func<object, INamedTypeSymbol> readSymbolField =
+                    Expression.Lambda<Func<object, INamedTypeSymbol>>(
+                        Expression.Field(
+                            Expression.Convert(symbolAndProjectIdParameter, namedTypeSymbolAndProjectId),
+                            symbolField),
+                        symbolAndProjectIdParameter)
+                    .Compile();
+
+                return async (symbol, solution, projects, cancellationToken) =>
+                {
+                    const bool transitive = true;
+                    Task task = callAsync(symbol, solution, projects, transitive, cancellationToken);
+                    await task.ConfigureAwait(false);
+
+                    // If we get here, the task completed successfully
+                    IEnumerable result = readResult(task);
+                    return result.Cast<object>().Select(readSymbolField).Where(s => s.TypeKind == TypeKind.Interface);
+                };
 #else
                 MethodInfo method = FindDerivedInterfacesAsyncMethodInfo.Value;
                 if (method == null)
