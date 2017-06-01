@@ -1,4 +1,4 @@
-# Inheritance Margin extension for Visual Studio 2010+
+# Inheritance Margin extension for Visual Studio 2012+
 
 [![Build status](https://ci.appveyor.com/api/projects/status/0n5me6pqj21fh0fo/branch/master?svg=true)](https://ci.appveyor.com/project/sharwell/inheritancemargin/branch/master)
 

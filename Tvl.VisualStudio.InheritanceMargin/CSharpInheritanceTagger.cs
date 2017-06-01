@@ -68,17 +68,17 @@ namespace Tvl.VisualStudio.InheritanceMargin
                 vsMajorVersion = 11;
             }
 
-            bool vs2010 = vsMajorVersion == 10;
             bool vs2012 = vsMajorVersion == 11;
-            bool vs14 = vsMajorVersion == 14;
+            bool vs2015 = vsMajorVersion == 14;
+            bool vs2017 = vsMajorVersion == 15;
 
             string assemblyName;
-            if (vs2010)
-                assemblyName = "Tvl.VisualStudio.InheritanceMargin.CSharp.10.0";
-            else if (vs2012)
+            if (vs2012)
                 assemblyName = "Tvl.VisualStudio.InheritanceMargin.CSharp.11.0";
-            else if (vs14)
+            else if (vs2015)
                 assemblyName = "Tvl.VisualStudio.InheritanceMargin.CSharp.14.0";
+            else if (vs2017)
+                assemblyName = "Tvl.VisualStudio.InheritanceMargin.CSharp.15.0";
             else if (RoslynUtilities.IsRoslynInstalled(serviceProvider))
                 assemblyName = "Tvl.VisualStudio.InheritanceMargin.CSharp.Roslyn";
             else
