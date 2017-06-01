@@ -40,5 +40,5 @@ using Tvl.VisualStudio.InheritanceMargin;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("3.4.0.0")]
-[assembly: AssemblyFileVersion("3.4.0.0")]
-[assembly: AssemblyInformationalVersion("3.4.0")]
+[assembly: AssemblyFileVersion("3.4.1.0")]
+[assembly: AssemblyInformationalVersion("3.4.1-dev")]
