@@ -14,9 +14,9 @@ namespace Tvl.VisualStudio.InheritanceMargin
 
     [Name("CSharp Inheritance Tagger Provider")]
     [TagType(typeof(IInheritanceTag))]
-    [Export(typeof(ITaggerProvider))]
+    [Export(typeof(IViewTaggerProvider))]
     [ContentType("CSharp")]
-    internal class CSharpInheritanceTaggerProvider : ITaggerProvider
+    internal class CSharpInheritanceTaggerProvider : IViewTaggerProvider
     {
         public CSharpInheritanceTaggerProvider()
         {
@@ -52,11 +52,11 @@ namespace Tvl.VisualStudio.InheritanceMargin
         }
 
         /// <inheritdoc/>
-        public ITagger<T> CreateTagger<T>(ITextBuffer buffer)
+        public ITagger<T> CreateTagger<T>(ITextView view, ITextBuffer buffer)
             where T : ITag
         {
             if (buffer != null)
-                return CSharpInheritanceTagger.CreateInstance(this, buffer) as ITagger<T>;
+                return CSharpInheritanceTagger.CreateInstance(this, view, buffer) as ITagger<T>;
 
             return null;
         }
