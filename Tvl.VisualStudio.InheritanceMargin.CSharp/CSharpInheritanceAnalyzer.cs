@@ -309,7 +309,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
                 Document document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
                 SourceTextContainer textContainer = document != null ? document.GetTextAsync().Result.Container : null;
                 Project project = document != null ? document.Project : null;
-                Solution solution = project.Solution;
+                Solution solution = project != null ? project.Solution : null;
 
                 List<ITagSpan<IInheritanceTag>> tags = new List<ITagSpan<IInheritanceTag>>();
 
