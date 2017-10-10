@@ -218,7 +218,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             {
                 try
                 {
-                    Task task = Task.Factory.StartNew(ReParse, CancellationToken.None, TaskCreationOptions.None, _taskScheduler);
+                    Task task = Task.Factory.StartNew(ReParse, CancellationToken.None, TaskCreationOptions.LongRunning, _taskScheduler);
                     task.ContinueWith(_ => _parsing = 0);
                 }
                 catch
