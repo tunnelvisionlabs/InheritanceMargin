@@ -274,6 +274,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractTarget.cs" />
     <Compile Include="BackgroundParser.cs" />
     <Compile Include="CSharpInheritanceAnalyzer.cs" />
     <Compile Include="MemberTarget.cs" />

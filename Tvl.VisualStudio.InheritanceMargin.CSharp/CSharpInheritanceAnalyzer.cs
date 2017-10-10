@@ -243,7 +243,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             }
         }
 
-        public static void NavigateToSymbol(SourceTextContainer textContainer, ISymbol symbol, Project project)
+        public static void NavigateToSymbol(SourceTextContainer textContainer, ProjectId projectId, KeyValuePair<SymbolKind, string>[] symbolPath)
         {
             Workspace workspace;
             if (!Workspace.TryGetWorkspace(textContainer, out workspace))
@@ -253,7 +253,110 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             if (visualStudioWorkspace == null)
                 return;
 
+            var project = visualStudioWorkspace.CurrentSolution.GetProject(projectId);
+            if (project == null)
+                return;
+
+            var compilation = project.GetCompilationAsync(CancellationToken.None).GetAwaiter().GetResult();
+            if (compilation == null)
+                return;
+
+            ImmutableArray<ISymbol> currentSymbols = ImmutableArray.Create<ISymbol>(compilation.GlobalNamespace);
+            int firstParameterIndex = symbolPath.Length;
+            for (int i = 0; i < symbolPath.Length; i++)
+            {
+                bool complete = false;
+                var pair = symbolPath[i];
+                switch (pair.Key)
+                {
+                case SymbolKind.Namespace:
+                    // The current symbols must be namespaces
+                    currentSymbols = currentSymbols.SelectMany(currentSymbol => ((INamespaceSymbol)currentSymbol).GetNamespaceMembers().Where(ns => ns.Name == pair.Value)).Select(ns => (ISymbol)ns).ToImmutableArray();
+                    continue;
+
+                case SymbolKind.NamedType:
+                    // The current symbol must be a namespaces or types
+                    GetNameAndArity(pair.Value, out string typeName, out int arity);
+                    currentSymbols = currentSymbols.SelectMany(currentSymbol => ((INamespaceOrTypeSymbol)currentSymbol).GetTypeMembers(typeName, arity)).Select(sym => (ISymbol)sym).ToImmutableArray();
+                    continue;
+
+                case SymbolKind.Property:
+                case SymbolKind.Event:
+                    currentSymbols = currentSymbols.SelectMany(currentSymbol => ((INamedTypeSymbol)currentSymbol).GetMembers().Where(sym => sym.Kind == pair.Key && sym.MetadataName == pair.Value)).ToImmutableArray();
+                    firstParameterIndex = i + 1;
+                    complete = true;
+                    break;
+
+                case SymbolKind.Method:
+                    GetNameAndArity(pair.Value, out string memberName, out arity);
+                    currentSymbols = currentSymbols.SelectMany(currentSymbol => ((INamedTypeSymbol)currentSymbol).GetMembers().Where(sym => sym.MetadataName == memberName && ((IMethodSymbol)sym).Arity == arity && sym.Kind == pair.Key)).ToImmutableArray();
+                    firstParameterIndex = i + 1;
+                    complete = true;
+                    break;
+
+                default:
+                    return;
+                }
+
+                if (complete)
+                    break;
+            }
+
+            if (firstParameterIndex < symbolPath.Length)
+            {
+                string[] parameters = symbolPath.Skip(firstParameterIndex).Select(pair => pair.Value).ToArray();
+                Func<ISymbol, bool> matchesSignature =
+                    sym =>
+                    {
+                        ImmutableArray<IParameterSymbol> parameterSymbols;
+                        switch (sym.Kind)
+                        {
+                        case SymbolKind.Property:
+                            parameterSymbols = ((IPropertySymbol)sym).Parameters;
+                            break;
+
+                        case SymbolKind.Method:
+                            parameterSymbols = ((IMethodSymbol)sym).Parameters;
+                            break;
+
+                        default:
+                            return false;
+                        }
+
+                        if (parameterSymbols.Length != parameters.Length)
+                            return false;
+
+                        for (int i = 0; i < parameters.Length; i++)
+                        {
+                            if (parameterSymbols[i].ToString() != parameters[i])
+                                return false;
+                        }
+
+                        return true;
+                    };
+
+                currentSymbols = currentSymbols.Where(matchesSignature).ToImmutableArray();
+            }
+
+            ISymbol symbol = currentSymbols.FirstOrDefault();
+            if (symbol == null)
+                return;
+
             visualStudioWorkspace.TryGoToDefinition(symbol, project, CancellationToken.None);
+        }
+
+        private static void GetNameAndArity(string metadataName, out string typeName, out int arity)
+        {
+            int backtick = metadataName.IndexOf('`');
+            if (backtick == -1)
+            {
+                typeName = metadataName;
+                arity = 0;
+                return;
+            }
+
+            arity = int.Parse(metadataName.Substring(backtick + 1));
+            typeName = metadataName.Substring(0, backtick);
         }
 
         private static async Task<IEnumerable<INamedTypeSymbol>> GetDerivedInterfacesFromImmediatelyDerivedAsync(
@@ -386,7 +489,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
 
                         InheritanceGlyph tag = typeSymbol.TypeKind == TypeKind.Interface ? InheritanceGlyph.HasImplementations : InheritanceGlyph.Overridden;
 
-                        var targets = derivedTypes.Select(i => new TypeTarget(textContainer, i, solution));
+                        var targets = derivedTypes.Select(i => new TypeTarget(textContainer, project, solution, i));
                         tags.Add(new TagSpan<IInheritanceTag>(span, _tagFactory.CreateTag(tag, builder.ToString().TrimEnd(), targets)));
                     }
 
@@ -533,7 +636,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
                         members.AddRange(implementingMethods);
                         members.AddRange(overridingMethods);
 
-                        var targets = members.Select(i => new MemberTarget(textContainer, i, solution));
+                        var targets = members.Select(i => new MemberTarget(textContainer, project, solution, i));
                         tags.Add(new TagSpan<IInheritanceTag>(span, _tagFactory.CreateTag(tag, builder.ToString().TrimEnd(), targets)));
                     }
                 }

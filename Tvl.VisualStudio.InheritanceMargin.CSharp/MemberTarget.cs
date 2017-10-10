@@ -6,32 +6,11 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.Text;
 
-    internal sealed class MemberTarget : IInheritanceTarget
+    internal sealed class MemberTarget : AbstractTarget
     {
-        private readonly SourceTextContainer _textContainer;
-        private readonly ISymbol _memberIdentifier;
-        private readonly Solution _solution;
-
-        public MemberTarget(SourceTextContainer textContainer, ISymbol memberIdentifier, Solution solution)
+        public MemberTarget(SourceTextContainer textContainer, Project currentProject, Solution solution, ISymbol symbol)
+            : base(textContainer, currentProject, solution, symbol)
         {
-            _textContainer = textContainer;
-            _memberIdentifier = memberIdentifier;
-            _solution = solution;
-        }
-
-        /// <inheritdoc/>
-        public string DisplayName
-        {
-            get
-            {
-                return _memberIdentifier.ToString();
-            }
-        }
-
-        /// <inheritdoc/>
-        public void NavigateTo()
-        {
-            CSharpInheritanceAnalyzer.NavigateToSymbol(_textContainer, _memberIdentifier, _solution.GetProject(_memberIdentifier.ContainingAssembly));
         }
     }
 }
