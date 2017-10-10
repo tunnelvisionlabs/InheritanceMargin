@@ -397,7 +397,9 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
                     {
                         if (!(memberNode is MethodDeclarationSyntax)
                             && !(memberNode is PropertyDeclarationSyntax)
+                            && !(memberNode is IndexerDeclarationSyntax)
                             && !(memberNode is EventDeclarationSyntax)
+                            && !(memberNode is EventFieldDeclarationSyntax)
                             && !(memberNode is VariableDeclaratorSyntax))
                         {
                             continue;
