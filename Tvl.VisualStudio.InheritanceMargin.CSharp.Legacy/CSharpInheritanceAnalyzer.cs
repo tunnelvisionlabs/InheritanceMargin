@@ -16,6 +16,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
     using Microsoft.RestrictedUsage.CSharp.Syntax;
     using Microsoft.VisualStudio.Shell;
     using Microsoft.VisualStudio.Text;
+    using Microsoft.VisualStudio.Text.Editor;
     using Microsoft.VisualStudio.Text.Tagging;
     using Tvl.VisualStudio.OutputWindow.Interfaces;
     using CSRPOSDATA = Microsoft.VisualStudio.CSharp.Services.Language.Interop.CSRPOSDATA;
@@ -30,7 +31,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
         private readonly SVsServiceProvider _serviceProvider;
         private readonly IInheritanceTagFactory _tagFactory;
 
-        public CSharpInheritanceAnalyzer(ITextBuffer textBuffer, TaskScheduler taskScheduler, ITextDocumentFactoryService textDocumentFactoryService, IOutputWindowService outputWindowService, SVsServiceProvider serviceProvider, IInheritanceTagFactory tagFactory)
+        public CSharpInheritanceAnalyzer(ITextView textView, ITextBuffer textBuffer, TaskScheduler taskScheduler, ITextDocumentFactoryService textDocumentFactoryService, IOutputWindowService outputWindowService, SVsServiceProvider serviceProvider, IInheritanceTagFactory tagFactory)
             : base(textBuffer, taskScheduler, textDocumentFactoryService, outputWindowService)
         {
             if (serviceProvider == null)
@@ -38,6 +39,7 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
 
             _serviceProvider = serviceProvider;
             _tagFactory = tagFactory;
+            textView.Closed += (sender, e) => Dispose();
         }
 
         /// <inheritdoc/>
