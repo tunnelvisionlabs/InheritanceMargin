@@ -4,14 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A3EBBB23-61F7-4A28-9179-59221875B713}</ProjectGuid>
+    <ProjectGuid>{10788A42-FFD8-4FDD-9F78-34860257D008}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Tvl.VisualStudio.InheritanceMargin.CSharp</RootNamespace>
-    <AssemblyName>Tvl.VisualStudio.InheritanceMargin.CSharp.15.0</AssemblyName>
+    <AssemblyName>Tvl.VisualStudio.InheritanceMargin.CSharp.16.0</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <BaseIntermediateOutputPath>obj\vs2017\</BaseIntermediateOutputPath>
+    <BaseIntermediateOutputPath>obj\vs2019\</BaseIntermediateOutputPath>
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
   </PropertyGroup>
@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\vs2017\Debug\</OutputPath>
+    <OutputPath>bin\vs2019\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;ROSLYN;ROSLYN2</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,7 +27,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\vs2017\Release\</OutputPath>
+    <OutputPath>bin\vs2019\Release\</OutputPath>
     <DefineConstants>TRACE;ROSLYN;ROSLYN2</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -286,7 +286,7 @@
       <Link>SharedKey.snk</Link>
     </None>
     <None Include="app.config" />
-    <None Include="packages.Tvl.VisualStudio.InheritanceMargin.CSharp.15.0.config" />
+    <None Include="packages.Tvl.VisualStudio.InheritanceMargin.CSharp.16.0.config" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\stylecop.json">
