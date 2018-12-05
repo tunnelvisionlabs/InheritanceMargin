@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="Tvl.VisualStudio.InheritanceMargin.8a936765-90d2-4d37-ae52-e43d7aae9e06" Version="3.6.1" Language="en-US" Publisher="Sam Harwell" />
+    <Identity Id="Tvl.VisualStudio.InheritanceMargin.8a936765-90d2-4d37-ae52-e43d7aae9e06" Version="3.6.2" Language="en-US" Publisher="Sam Harwell" />
     <DisplayName>Inheritance Margin</DisplayName>
     <Description>Show inheritance information in the glyph margin.</Description>
     <MoreInfo>https://github.com/tunnelvisionlabs/InheritanceMargin</MoreInfo>
