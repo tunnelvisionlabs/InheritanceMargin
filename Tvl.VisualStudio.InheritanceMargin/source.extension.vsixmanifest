@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="Tvl.VisualStudio.InheritanceMargin.8a936765-90d2-4d37-ae52-e43d7aae9e06" Version="3.6.1" Language="en-US" Publisher="Sam Harwell" />
+    <Identity Id="Tvl.VisualStudio.InheritanceMargin.8a936765-90d2-4d37-ae52-e43d7aae9e06" Version="3.6.2" Language="en-US" Publisher="Sam Harwell" />
     <DisplayName>Inheritance Margin</DisplayName>
     <Description>Show inheritance information in the glyph margin.</Description>
     <MoreInfo>https://github.com/tunnelvisionlabs/InheritanceMargin</MoreInfo>
@@ -21,7 +21,7 @@
     <Dependency d:Source="File"
       DisplayName="Visual Studio Output Window Services"
       Id="Tvl.VisualStudio.OutputWindow.3EF11167-A319-43DB-B1B4-A9778A90FAE0"
-      Version="[3.0.0,)"
+      Version="[3.1.0,)"
       d:InstallSource="Embed"
       Location="Tvl.VisualStudio.OutputWindow.vsix" />
   </Dependencies>

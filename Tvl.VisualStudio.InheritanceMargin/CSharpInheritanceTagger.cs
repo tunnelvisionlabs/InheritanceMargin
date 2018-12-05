@@ -72,6 +72,7 @@ namespace Tvl.VisualStudio.InheritanceMargin
             bool vs2012 = vsMajorVersion == 11;
             bool vs2015 = vsMajorVersion == 14;
             bool vs2017 = vsMajorVersion == 15;
+            bool vs2019 = vsMajorVersion == 16;
 
             string assemblyName;
             if (vs2012)
@@ -80,6 +81,8 @@ namespace Tvl.VisualStudio.InheritanceMargin
                 assemblyName = "Tvl.VisualStudio.InheritanceMargin.CSharp.14.0";
             else if (vs2017)
                 assemblyName = "Tvl.VisualStudio.InheritanceMargin.CSharp.15.0";
+            else if (vs2019)
+                assemblyName = "Tvl.VisualStudio.InheritanceMargin.CSharp.16.0";
             else if (RoslynUtilities.IsRoslynInstalled(serviceProvider))
                 assemblyName = "Tvl.VisualStudio.InheritanceMargin.CSharp.Roslyn";
             else
