@@ -98,6 +98,13 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             new Lazy<Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>>(() =>
             {
 #if ROSLYN2
+                if (FindImmediatelyDerivedAndImplementingTypesAsyncMethodInfo.Value is MethodInfo method)
+                {
+                    // Roslyn 3.7-beta1 switched back to the form from Roslyn 1.3, with the exception of the return type.
+                    var immediatelyDerived = (Func<INamedTypeSymbol, Solution, CancellationToken, Task<ImmutableArray<INamedTypeSymbol>>>)Delegate.CreateDelegate(typeof(Func<INamedTypeSymbol, Solution, CancellationToken, Task<ImmutableArray<INamedTypeSymbol>>>), method);
+                    return (symbol, solution, projects, cancellationToken) => GetDerivedInterfacesFromImmediatelyDerivedAsync(symbol, solution, projects, immediatelyDerived, cancellationToken);
+                }
+
                 Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>> fallbackAccessor =
                     (symbol, solution, projects, cancellationToken) => Task.FromResult(Enumerable.Empty<INamedTypeSymbol>());
 
@@ -361,12 +368,13 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             typeName = metadataName.Substring(0, backtick);
         }
 
-        private static async Task<IEnumerable<INamedTypeSymbol>> GetDerivedInterfacesFromImmediatelyDerivedAsync(
+        private static async Task<IEnumerable<INamedTypeSymbol>> GetDerivedInterfacesFromImmediatelyDerivedAsync<TNamedTypeSymbolCollection>(
             INamedTypeSymbol type,
             Solution solution,
             IImmutableSet<Project> projects,
-            Func<INamedTypeSymbol, Solution, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>> immediatelyDerivedAsync,
+            Func<INamedTypeSymbol, Solution, CancellationToken, Task<TNamedTypeSymbolCollection>> immediatelyDerivedAsync,
             CancellationToken cancellationToken)
+            where TNamedTypeSymbolCollection : IEnumerable<INamedTypeSymbol>
         {
             if (type.TypeKind != TypeKind.Interface)
             {
