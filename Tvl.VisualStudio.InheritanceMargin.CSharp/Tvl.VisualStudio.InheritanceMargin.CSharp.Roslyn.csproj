@@ -1,95 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project>
   <PropertyGroup>
     <MSBuildProjectExtensionsPath>obj\vs2013.roslyn\</MSBuildProjectExtensionsPath>
+    <BaseIntermediateOutputPath>obj\vs2013.roslyn\</BaseIntermediateOutputPath>
   </PropertyGroup>
 
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{912F988E-C5D9-413A-9B81-86D0AA67947B}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFramework>net45</TargetFramework>
     <RootNamespace>Tvl.VisualStudio.InheritanceMargin.CSharp</RootNamespace>
-    <AssemblyName>Tvl.VisualStudio.InheritanceMargin.CSharp.Roslyn</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <BaseIntermediateOutputPath>obj\vs2013.roslyn\</BaseIntermediateOutputPath>
-    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+
+    <OutputPath>bin\vs2013.roslyn\$(Configuration)\</OutputPath>
+    <DefaultItemExcludes>$(DefaultItemExcludes);obj/vs2015/**;obj/vs2017/**;obj/vs2019/**</DefaultItemExcludes>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\vs2013.roslyn\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;ROSLYN</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\vs2013.roslyn\Release\</OutputPath>
-    <DefineConstants>TRACE;ROSLYN</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <PropertyGroup>
-    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
-    <CodeAnalysisRuleSet>..\TunnelVisionLabs.InheritanceMargin.ruleset</CodeAnalysisRuleSet>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\Reference\SharedKey.snk</AssemblyOriginatorKeyFile>
+    <DefineConstants>$(DefineConstants);ROSLYN</DefineConstants>
   </PropertyGroup>
+
   <ItemGroup>
     <Reference Include="Microsoft.CodeAnalysis.EditorFeatures.Text, Version=0.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\Reference\Microsoft.CodeAnalysis.EditorFeatures.Text.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
+
   <ItemGroup>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.0.0" PrivateAssets="all" />
     <PackageReference Include="Tvl.VisualStudio.OutputWindow.Interfaces" Version="2.1.0" />
     <PackageReference Include="Microsoft.CodeAnalysis" Version="0.6.4033103-beta" />
     <PackageReference Include="Microsoft.VisualStudio.LanguageServices" Version="0.6.4033103-beta" />
-    <PackageReference Include="VSSDK.GraphModel.12" Version="12.0.4" />
     <PackageReference Include="VSSDK.Shell.12" Version="12.0.4" />
     <PackageReference Include="VSSDK.Text.12" Version="12.0.4" />
 
     <!-- Block transitive dependencies to avoid conflicts -->
     <PackageReference Update="@(PackageReference)" PrivateAssets="all" />
   </ItemGroup>
+
   <ItemGroup>
-    <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.Interfaces\Tvl.VisualStudio.InheritanceMargin.Interfaces.csproj">
-      <Project>{f4b709e6-8926-42e6-914a-749cb473f37b}</Project>
-      <Name>Tvl.VisualStudio.InheritanceMargin.Interfaces</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.Interfaces\Tvl.VisualStudio.InheritanceMargin.Interfaces.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AbstractTarget.cs" />
-    <Compile Include="BackgroundParser.cs" />
-    <Compile Include="CSharpInheritanceAnalyzer.cs" />
-    <Compile Include="MemberTarget.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TypeTarget.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Reference\SharedKey.snk">
-      <Link>SharedKey.snk</Link>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <AdditionalFiles Include="..\stylecop.json">
-      <Link>stylecop.json</Link>
-    </AdditionalFiles>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
+  <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.targets" />
+
 </Project>
