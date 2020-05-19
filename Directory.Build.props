@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
 
-  <PropertyGroup>
-    <Company>Tunnel Vision Laboratories, LLC</Company>
-    <Copyright>Copyright © Sam Harwell 2014</Copyright>
-
-    <Version>3.6.0.0</Version>
-    <FileVersion>3.6.2.0</FileVersion>
-    <InformationalVersion>3.6.2</InformationalVersion>
-  </PropertyGroup>
-
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -24,6 +15,16 @@
     <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)TunnelVisionLabs.InheritanceMargin.ruleset</CodeAnalysisRuleSet>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Reference\SharedKey.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <!-- Versioning and packaging -->
+  <ItemGroup>
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.1.91" PrivateAssets="all" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <Company>Tunnel Vision Laboratories, LLC</Company>
+    <Copyright>Copyright © Sam Harwell 2014</Copyright>
   </PropertyGroup>
 
 </Project>
