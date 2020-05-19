@@ -1,4 +1,7 @@
-﻿#if ROSLYN
+﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
+// Licensed under the MIT License. See LICENSE.txt in the project root for license information.
+
+#if ROSLYN
 
 namespace Tvl.VisualStudio.InheritanceMargin.CSharp
 {

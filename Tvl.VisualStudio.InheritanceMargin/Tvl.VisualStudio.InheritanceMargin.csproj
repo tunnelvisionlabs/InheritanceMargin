@@ -1,18 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project>
+
+  <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
+
   <PropertyGroup>
-    <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectTypeGuids>{82b43b9b-a64c-4715-b499-d71e9ca2bd60};{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <ProjectGuid>{C5BE4BE1-F167-4D34-980A-1A2F83C5D74A}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tvl.VisualStudio.InheritanceMargin</RootNamespace>
-    <AssemblyName>Tvl.VisualStudio.InheritanceMargin</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFramework>net45</TargetFramework>
+    <AssetTargetFallback>net46;$(AssetTargetFallback)</AssetTargetFallback>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <GeneratePkgDefFile>true</GeneratePkgDefFile>
     <UseCodebase>true</UseCodebase>
     <IncludeAssemblyInVSIXContainer>true</IncludeAssemblyInVSIXContainer>
@@ -20,129 +16,48 @@
     <IncludeDebugSymbolsInLocalVSIXDeployment>false</IncludeDebugSymbolsInLocalVSIXDeployment>
     <CopyBuildOutputToOutputDirectory>true</CopyBuildOutputToOutputDirectory>
     <CopyOutputSymbolsToOutputDirectory>false</CopyOutputSymbolsToOutputDirectory>
-    <AssetTargetFallback Condition="'$(BuildingInsideVisualStudio)' == 'true'">net45;net46;$(AssetTargetFallback)</AssetTargetFallback>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
   </PropertyGroup>
-  <PropertyGroup>
-    <!-- Common debugging support -->
-    <StartAction>Program</StartAction>
-    <StartProgram>$(DevEnvDir)\devenv.exe</StartProgram>
-    <StartArguments>/rootSuffix Exp</StartArguments>
-  </PropertyGroup>
+
   <PropertyGroup Condition="'$(BuildingInsideVisualStudio)' != 'true'">
     <!-- This property disables extension deployment for command line builds; required for some automated builds -->
     <DeployExtension>False</DeployExtension>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
-    <CodeAnalysisRuleSet>..\TunnelVisionLabs.InheritanceMargin.ruleset</CodeAnalysisRuleSet>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\Reference\SharedKey.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="..\LICENSE.txt" Link="LICENSE.txt" IncludeInVSIX="true" />
+    <Content Include="VSIXImage_large.png" IncludeInVSIX="true" />
+    <Content Include="VSIXImage_small.png" IncludeInVSIX="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <VSCTCompile Include="InheritanceMargin.vsct">
+      <ResourceName>1000</ResourceName>
+      <SubType>Designer</SubType>
+    </VSCTCompile>
+  </ItemGroup>
+
   <ItemGroup>
     <Reference Include="System.Xaml" />
   </ItemGroup>
+
   <ItemGroup>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.0.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="15.1.192" PrivateAssets="all" />
     <PackageReference Include="Tvl.VisualStudio.OutputWindow" Version="3.1.0" PrivateAssets="all" />
     <PackageReference Include="Tvl.VisualStudio.OutputWindow.Interfaces" Version="2.1.0" />
     <PackageReference Include="VSSDK.Shell.11" Version="11.0.4" />
     <PackageReference Include="VSSDK.Text.11" Version="11.0.4" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="CommandTranslation\CommandId.cs" />
-    <Compile Include="CommandTranslation\CommandRouter.cs" />
-    <Compile Include="CommandTranslation\CommandTargetParameters.cs" />
-    <Compile Include="CSharpInheritanceTagger.cs" />
-    <Compile Include="CSharpInheritanceTaggerProvider.cs" />
-    <Compile Include="InheritanceGlyphFactory.cs" />
-    <Compile Include="InheritanceGlyphFactoryProvider.cs" />
-    <Compile Include="InheritanceGlyphMouseHandler.cs" />
-    <Compile Include="InheritanceGlyphMouseHandlerProvider.cs" />
-    <Compile Include="InheritanceMarginConstants.cs" />
-    <Compile Include="InheritanceMarginPackage.cs" />
-    <Compile Include="InheritanceTag.cs" />
-    <Compile Include="InheritanceTagFactory.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProvideBindingPathAttribute.cs" />
-    <Compile Include="RoslynUtilities.cs" />
+    <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.CSharp.Legacy\Tvl.VisualStudio.InheritanceMargin.CSharp.11.0.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.CSharp.Legacy\Tvl.VisualStudio.InheritanceMargin.CSharp.12.0.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.14.0.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.15.0.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.16.0.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.Roslyn.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.Interfaces\Tvl.VisualStudio.InheritanceMargin.Interfaces.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\LICENSE.txt">
-      <Link>LICENSE.txt</Link>
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <VSCTCompile Include="InheritanceMargin.vsct">
-      <ResourceName>1000</ResourceName>
-      <SubType>Designer</SubType>
-    </VSCTCompile>
-    <Content Include="VSIXImage_large.png">
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <Content Include="VSIXImage_small.png">
-      <IncludeInVSIX>true</IncludeInVSIX>
-    </Content>
-    <None Include="..\Reference\SharedKey.snk">
-      <Link>SharedKey.snk</Link>
-    </None>
-    <None Include="source.extension.vsixmanifest">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.CSharp.Legacy\Tvl.VisualStudio.InheritanceMargin.CSharp.11.0.csproj">
-      <Project>{2acb7340-8400-4d5d-8624-a4e7fe8fc474}</Project>
-      <Name>Tvl.VisualStudio.InheritanceMargin.CSharp.11.0</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.CSharp.Legacy\Tvl.VisualStudio.InheritanceMargin.CSharp.12.0.csproj">
-      <Project>{fbb6e057-77da-4ff6-a867-ef741971e511}</Project>
-      <Name>Tvl.VisualStudio.InheritanceMargin.CSharp.12.0</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.14.0.csproj">
-      <Project>{7d84bb06-4c50-4eb4-abd5-71c63b0c2409}</Project>
-      <Name>Tvl.VisualStudio.InheritanceMargin.CSharp.14.0</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.15.0.csproj">
-      <Project>{a3ebbb23-61f7-4a28-9179-59221875b713}</Project>
-      <Name>Tvl.VisualStudio.InheritanceMargin.CSharp.15.0</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.16.0.csproj">
-      <Project>{10788a42-ffd8-4fdd-9f78-34860257d008}</Project>
-      <Name>Tvl.VisualStudio.InheritanceMargin.CSharp.16.0</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.Roslyn.csproj">
-      <Project>{912f988e-c5d9-413a-9b81-86d0aa67947b}</Project>
-      <Name>Tvl.VisualStudio.InheritanceMargin.CSharp.Roslyn</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.Interfaces\Tvl.VisualStudio.InheritanceMargin.Interfaces.csproj">
-      <Project>{f4b709e6-8926-42e6-914a-749cb473f37b}</Project>
-      <Name>Tvl.VisualStudio.InheritanceMargin.Interfaces</Name>
-    </ProjectReference>
-  </ItemGroup>
+
   <ItemGroup>
     <Resource Include="Resources\has-implementations.png" />
     <Resource Include="Resources\implements.png" />
@@ -151,19 +66,19 @@
     <Resource Include="Resources\override-is-overridden-combined2.png" />
     <Resource Include="Resources\overrides.png" />
   </ItemGroup>
+
   <ItemGroup>
-    <EmbeddedResource Include="VSPackage.resx">
-      <MergeWithCTO>true</MergeWithCTO>
-      <LogicalName>VSPackage.resources</LogicalName>
-    </EmbeddedResource>
+    <EmbeddedResource Update="VSPackage.resx" MergeWithCTO="true" LogicalName="VSPackage.resources" />
   </ItemGroup>
-  <ItemGroup>
-    <AdditionalFiles Include="..\stylecop.json">
-      <Link>stylecop.json</Link>
-    </AdditionalFiles>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+  <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.targets" />
+
   <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="Exists('$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets')" />
+
+  <ItemGroup>
+    <!-- https://github.com/Microsoft/extendvs/issues/57 -->
+    <ProjectReference Update="@(ProjectReference)" Name="%(Filename)" />
+  </ItemGroup>
 
   <Target Name="IncludeNuGetPackageReferences" AfterTargets="GetVsixSourceItems">
     <ItemGroup>
