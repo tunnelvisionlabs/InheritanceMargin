@@ -6,6 +6,7 @@ init:
 - ps: git config --global core.autocrlf true
 before_build:
 - nuget restore
+skip_tags: true
 build:
   verbosity: minimal
 artifacts:
