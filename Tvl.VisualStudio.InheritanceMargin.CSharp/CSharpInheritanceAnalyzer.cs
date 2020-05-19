@@ -504,7 +504,6 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
                             && !(memberNode is PropertyDeclarationSyntax)
                             && !(memberNode is IndexerDeclarationSyntax)
                             && !(memberNode is EventDeclarationSyntax)
-                            && !(memberNode is EventFieldDeclarationSyntax)
                             && !(memberNode is VariableDeclaratorSyntax))
                         {
                             continue;
