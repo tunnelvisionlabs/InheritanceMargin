@@ -98,7 +98,8 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             new Lazy<Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>>(() =>
             {
 #if ROSLYN2
-                if (FindImmediatelyDerivedAndImplementingTypesAsyncMethodInfo.Value is MethodInfo method)
+                if (FindImmediatelyDerivedAndImplementingTypesAsyncMethodInfo.Value is MethodInfo method
+                    && method.ReturnType == typeof(Task<ImmutableArray<INamedTypeSymbol>>))
                 {
                     // Roslyn 3.7-beta1 switched back to the form from Roslyn 1.3, with the exception of the return type.
                     var immediatelyDerived = (Func<INamedTypeSymbol, Solution, CancellationToken, Task<ImmutableArray<INamedTypeSymbol>>>)Delegate.CreateDelegate(typeof(Func<INamedTypeSymbol, Solution, CancellationToken, Task<ImmutableArray<INamedTypeSymbol>>>), method);
