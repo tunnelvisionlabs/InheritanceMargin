@@ -98,7 +98,8 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             new Lazy<Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>>(() =>
             {
 #if ROSLYN2
-                if (FindImmediatelyDerivedAndImplementingTypesAsyncMethodInfo.Value is MethodInfo method)
+                if (FindImmediatelyDerivedAndImplementingTypesAsyncMethodInfo.Value is MethodInfo method
+                    && method.ReturnType == typeof(Task<ImmutableArray<INamedTypeSymbol>>))
                 {
                     // Roslyn 3.7-beta1 switched back to the form from Roslyn 1.3, with the exception of the return type.
                     var immediatelyDerived = (Func<INamedTypeSymbol, Solution, CancellationToken, Task<ImmutableArray<INamedTypeSymbol>>>)Delegate.CreateDelegate(typeof(Func<INamedTypeSymbol, Solution, CancellationToken, Task<ImmutableArray<INamedTypeSymbol>>>), method);
@@ -120,18 +121,40 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
                     null,
                     new[] { typeof(INamedTypeSymbol), typeof(Solution), typeof(CancellationToken) },
                     null);
-                if (declaredMethodInfo == null)
-                    return fallbackAccessor;
+
+                ParameterExpression typeParameter = Expression.Parameter(typeof(INamedTypeSymbol), "type");
+                Expression typeParameterReference;
+                if (declaredMethodInfo is object)
+                {
+                    // Our argument matches the one expected by FindImmediatelyDerivedAndImplementingTypesAsync
+                    typeParameterReference = typeParameter;
+                }
+                else
+                {
+                    // Roslyn 3.6 changed the first argument type
+                    declaredMethodInfo = DependentTypeFinder.Value.GetMethod(
+                        "FindImmediatelyDerivedAndImplementingTypesAsync",
+                        BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic,
+                        null,
+                        new[] { namedTypeSymbolAndProjectId, typeof(Solution), typeof(CancellationToken) },
+                        null);
+                    if (declaredMethodInfo == null)
+                        return fallbackAccessor;
+
+                    typeParameterReference = Expression.New(
+                        namedTypeSymbolAndProjectId.GetConstructors().Single(),
+                        typeParameter,
+                        Expression.Convert(Expression.Constant(null), typeof(ProjectId)));
+                }
 
                 // Here we build up the actual call to FindDerivedAndImplementingTypesAsync
-                ParameterExpression typeParameter = Expression.Parameter(typeof(INamedTypeSymbol), "type");
                 ParameterExpression solutionParameter = Expression.Parameter(typeof(Solution), "solution");
                 ParameterExpression cancellationTokenParameter = Expression.Parameter(typeof(CancellationToken), "cancellationToken");
                 Func<INamedTypeSymbol, Solution, CancellationToken, Task> callAsync =
                     Expression.Lambda<Func<INamedTypeSymbol, Solution, CancellationToken, Task>>(
                         Expression.Call(
                             declaredMethodInfo,
-                            typeParameter,
+                            typeParameterReference,
                             solutionParameter,
                             cancellationTokenParameter),
                         typeParameter,
