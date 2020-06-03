@@ -121,18 +121,40 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
                     null,
                     new[] { typeof(INamedTypeSymbol), typeof(Solution), typeof(CancellationToken) },
                     null);
-                if (declaredMethodInfo == null)
-                    return fallbackAccessor;
+
+                ParameterExpression typeParameter = Expression.Parameter(typeof(INamedTypeSymbol), "type");
+                Expression typeParameterReference;
+                if (declaredMethodInfo is object)
+                {
+                    // Our argument matches the one expected by FindImmediatelyDerivedAndImplementingTypesAsync
+                    typeParameterReference = typeParameter;
+                }
+                else
+                {
+                    // Roslyn 3.6 changed the first argument type
+                    declaredMethodInfo = DependentTypeFinder.Value.GetMethod(
+                        "FindImmediatelyDerivedAndImplementingTypesAsync",
+                        BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic,
+                        null,
+                        new[] { namedTypeSymbolAndProjectId, typeof(Solution), typeof(CancellationToken) },
+                        null);
+                    if (declaredMethodInfo == null)
+                        return fallbackAccessor;
+
+                    typeParameterReference = Expression.New(
+                        namedTypeSymbolAndProjectId.GetConstructors().Single(),
+                        typeParameter,
+                        Expression.Convert(Expression.Constant(null), typeof(ProjectId)));
+                }
 
                 // Here we build up the actual call to FindDerivedAndImplementingTypesAsync
-                ParameterExpression typeParameter = Expression.Parameter(typeof(INamedTypeSymbol), "type");
                 ParameterExpression solutionParameter = Expression.Parameter(typeof(Solution), "solution");
                 ParameterExpression cancellationTokenParameter = Expression.Parameter(typeof(CancellationToken), "cancellationToken");
                 Func<INamedTypeSymbol, Solution, CancellationToken, Task> callAsync =
                     Expression.Lambda<Func<INamedTypeSymbol, Solution, CancellationToken, Task>>(
                         Expression.Call(
                             declaredMethodInfo,
-                            typeParameter,
+                            typeParameterReference,
                             solutionParameter,
                             cancellationTokenParameter),
                         typeParameter,
