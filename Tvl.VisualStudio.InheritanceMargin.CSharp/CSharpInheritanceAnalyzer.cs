@@ -89,6 +89,15 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
                 new[] { typeof(INamedTypeSymbol), typeof(Solution), typeof(CancellationToken) },
                 null));
 
+        // Roslyn 3.7-beta2
+        private static readonly Lazy<MethodInfo> SymbolFinderFindDerivedInterfacesAsync =
+            new Lazy<MethodInfo>(() => typeof(SymbolFinder).GetMethod(
+                "FindDerivedInterfacesAsync",
+                BindingFlags.Static | BindingFlags.Public,
+                null,
+                new[] { typeof(INamedTypeSymbol), typeof(Solution), typeof(IImmutableSet<Project>), typeof(CancellationToken) },
+                null));
+
         /// <summary>
         /// Prior to Roslyn 1.2, <c>DependentTypeFinder.FindDerivedInterfacesAsync</c> can be used directly. In Roslyn
         /// 1.2, <c>DependentTypeFinder.GetTypesImmediatelyDerivedFromInterfacesAsync</c> must be used instead. In
@@ -98,6 +107,12 @@ namespace Tvl.VisualStudio.InheritanceMargin.CSharp
             new Lazy<Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>>(() =>
             {
 #if ROSLYN2
+                // Roslyn 3.7-beta2 switched to a new public API
+                if (SymbolFinderFindDerivedInterfacesAsync.Value is MethodInfo symbolFinderMethod)
+                {
+                    return (Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>)Delegate.CreateDelegate(typeof(Func<INamedTypeSymbol, Solution, IImmutableSet<Project>, CancellationToken, Task<IEnumerable<INamedTypeSymbol>>>), symbolFinderMethod);
+                }
+
                 if (FindImmediatelyDerivedAndImplementingTypesAsyncMethodInfo.Value is MethodInfo method
                     && method.ReturnType == typeof(Task<ImmutableArray<INamedTypeSymbol>>))
                 {
