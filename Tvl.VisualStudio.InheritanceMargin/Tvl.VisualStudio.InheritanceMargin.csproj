@@ -41,7 +41,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <TvlVisualStudioOutputWindowVersion>3.1.0</TvlVisualStudioOutputWindowVersion>
+    <TvlVisualStudioOutputWindowVersion>3.2.0</TvlVisualStudioOutputWindowVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -58,6 +58,7 @@
     <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.14.0.csproj" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.15.0.csproj" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.16.0.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.17.0.csproj" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.Roslyn.csproj" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\Tvl.VisualStudio.InheritanceMargin.Interfaces\Tvl.VisualStudio.InheritanceMargin.Interfaces.csproj" />
   </ItemGroup>
@@ -106,7 +107,7 @@
 
   <Target Name="GetMaxSupportedVisualStudioVersionExclusive" Returns="$(MaxSupportedVisualStudioVersionExclusive)">
     <PropertyGroup>
-      <MaxSupportedVisualStudioVersionExclusive Condition="'$(MaxSupportedVisualStudioVersionExclusive)' == ''">17.0</MaxSupportedVisualStudioVersionExclusive>
+      <MaxSupportedVisualStudioVersionExclusive Condition="'$(MaxSupportedVisualStudioVersionExclusive)' == ''">18.0</MaxSupportedVisualStudioVersionExclusive>
     </PropertyGroup>
   </Target>
 

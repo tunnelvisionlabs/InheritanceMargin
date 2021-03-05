@@ -12,21 +12,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TunnelVisionLabs.InheritanceMargin.ruleset = TunnelVisionLabs.InheritanceMargin.ruleset
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tvl.VisualStudio.InheritanceMargin", "Tvl.VisualStudio.InheritanceMargin\Tvl.VisualStudio.InheritanceMargin.csproj", "{C5BE4BE1-F167-4D34-980A-1A2F83C5D74A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tvl.VisualStudio.InheritanceMargin", "Tvl.VisualStudio.InheritanceMargin\Tvl.VisualStudio.InheritanceMargin.csproj", "{C5BE4BE1-F167-4D34-980A-1A2F83C5D74A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tvl.VisualStudio.InheritanceMargin.Interfaces", "Tvl.VisualStudio.InheritanceMargin.Interfaces\Tvl.VisualStudio.InheritanceMargin.Interfaces.csproj", "{F4B709E6-8926-42E6-914A-749CB473F37B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tvl.VisualStudio.InheritanceMargin.Interfaces", "Tvl.VisualStudio.InheritanceMargin.Interfaces\Tvl.VisualStudio.InheritanceMargin.Interfaces.csproj", "{F4B709E6-8926-42E6-914A-749CB473F37B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tvl.VisualStudio.InheritanceMargin.CSharp.11.0", "Tvl.VisualStudio.InheritanceMargin.CSharp.Legacy\Tvl.VisualStudio.InheritanceMargin.CSharp.11.0.csproj", "{2ACB7340-8400-4D5D-8624-A4E7FE8FC474}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tvl.VisualStudio.InheritanceMargin.CSharp.11.0", "Tvl.VisualStudio.InheritanceMargin.CSharp.Legacy\Tvl.VisualStudio.InheritanceMargin.CSharp.11.0.csproj", "{2ACB7340-8400-4D5D-8624-A4E7FE8FC474}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tvl.VisualStudio.InheritanceMargin.CSharp.12.0", "Tvl.VisualStudio.InheritanceMargin.CSharp.Legacy\Tvl.VisualStudio.InheritanceMargin.CSharp.12.0.csproj", "{FBB6E057-77DA-4FF6-A867-EF741971E511}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tvl.VisualStudio.InheritanceMargin.CSharp.12.0", "Tvl.VisualStudio.InheritanceMargin.CSharp.Legacy\Tvl.VisualStudio.InheritanceMargin.CSharp.12.0.csproj", "{FBB6E057-77DA-4FF6-A867-EF741971E511}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tvl.VisualStudio.InheritanceMargin.CSharp.Roslyn", "Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.Roslyn.csproj", "{912F988E-C5D9-413A-9B81-86D0AA67947B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tvl.VisualStudio.InheritanceMargin.CSharp.Roslyn", "Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.Roslyn.csproj", "{912F988E-C5D9-413A-9B81-86D0AA67947B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tvl.VisualStudio.InheritanceMargin.CSharp.14.0", "Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.14.0.csproj", "{7D84BB06-4C50-4EB4-ABD5-71C63B0C2409}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tvl.VisualStudio.InheritanceMargin.CSharp.14.0", "Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.14.0.csproj", "{7D84BB06-4C50-4EB4-ABD5-71C63B0C2409}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tvl.VisualStudio.InheritanceMargin.CSharp.15.0", "Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.15.0.csproj", "{A3EBBB23-61F7-4A28-9179-59221875B713}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tvl.VisualStudio.InheritanceMargin.CSharp.15.0", "Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.15.0.csproj", "{A3EBBB23-61F7-4A28-9179-59221875B713}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tvl.VisualStudio.InheritanceMargin.CSharp.16.0", "Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.16.0.csproj", "{10788A42-FFD8-4FDD-9F78-34860257D008}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tvl.VisualStudio.InheritanceMargin.CSharp.16.0", "Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.16.0.csproj", "{10788A42-FFD8-4FDD-9F78-34860257D008}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tvl.VisualStudio.InheritanceMargin.CSharp.17.0", "Tvl.VisualStudio.InheritanceMargin.CSharp\Tvl.VisualStudio.InheritanceMargin.CSharp.17.0.csproj", "{FC878788-4674-4975-B90F-7CCFF33E32D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +68,10 @@ Global
 		{10788A42-FFD8-4FDD-9F78-34860257D008}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10788A42-FFD8-4FDD-9F78-34860257D008}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10788A42-FFD8-4FDD-9F78-34860257D008}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC878788-4674-4975-B90F-7CCFF33E32D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC878788-4674-4975-B90F-7CCFF33E32D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC878788-4674-4975-B90F-7CCFF33E32D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC878788-4674-4975-B90F-7CCFF33E32D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
