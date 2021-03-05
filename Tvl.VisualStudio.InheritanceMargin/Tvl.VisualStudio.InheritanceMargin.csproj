@@ -41,7 +41,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <TvlVisualStudioOutputWindowVersion>3.1.0</TvlVisualStudioOutputWindowVersion>
+    <TvlVisualStudioOutputWindowVersion>3.2.0</TvlVisualStudioOutputWindowVersion>
   </PropertyGroup>
 
   <ItemGroup>
