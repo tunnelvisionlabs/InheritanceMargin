@@ -12,7 +12,7 @@
     <RootNamespace>Tvl.VisualStudio.InheritanceMargin.CSharp</RootNamespace>
 
     <OutputPath>bin\vs2015\$(Configuration)\</OutputPath>
-    <DefaultItemExcludes>$(DefaultItemExcludes);obj/vs2013.roslyn/**;obj/vs2017/**;obj/vs2019/**</DefaultItemExcludes>
+    <DefaultItemExcludes>$(DefaultItemExcludes);obj/vs2013.roslyn/**;obj/vs2017/**;obj/vs2019/**;obj/vs17/**</DefaultItemExcludes>
   </PropertyGroup>
 
   <PropertyGroup>

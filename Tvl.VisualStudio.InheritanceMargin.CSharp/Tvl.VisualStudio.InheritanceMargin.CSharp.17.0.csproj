@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
-    <MSBuildProjectExtensionsPath>obj\vs2017\</MSBuildProjectExtensionsPath>
-    <BaseIntermediateOutputPath>obj\vs2017\</BaseIntermediateOutputPath>
+    <MSBuildProjectExtensionsPath>obj\vs17\</MSBuildProjectExtensionsPath>
+    <BaseIntermediateOutputPath>obj\vs17\</BaseIntermediateOutputPath>
   </PropertyGroup>
 
   <Import Sdk="Microsoft.NET.Sdk" Project="Sdk.props" />
@@ -11,8 +11,8 @@
     <TargetFramework>net46</TargetFramework>
     <RootNamespace>Tvl.VisualStudio.InheritanceMargin.CSharp</RootNamespace>
 
-    <OutputPath>bin\vs2017\$(Configuration)\</OutputPath>
-    <DefaultItemExcludes>$(DefaultItemExcludes);obj/vs2013.roslyn/**;obj/vs2015/**;obj/vs2019/**;obj/vs17/**</DefaultItemExcludes>
+    <OutputPath>bin\vs17\$(Configuration)\</OutputPath>
+    <DefaultItemExcludes>$(DefaultItemExcludes);obj/vs2013.roslyn/**;obj/vs2015/**;obj/vs2017/**;obj/vs2019/**</DefaultItemExcludes>
   </PropertyGroup>
 
   <PropertyGroup>
